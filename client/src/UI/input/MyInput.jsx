@@ -1,0 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import classes from './MyInput.module.css';
+
+function MyInput({ ...props }) {
+  return (
+    <input {...props} className={classes.myInput} />
+  );
+}
+
+export default MyInput;
