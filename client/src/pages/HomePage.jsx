@@ -1,7 +1,12 @@
+import MyButton from '../UI/button/MyButton';
+import MyInput from '../UI/input/MyInput';
+
 function HomePage() {
   return (
     <div>
-      Home
+      Welcome to ExPats.com
+      <MyInput />
+      <MyButton>Find</MyButton>
     </div>
   );
 }
