@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './App.css';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -17,6 +18,9 @@ import InputList from './UI/combobox/InputList';
 // import MyButton from './UI/button/MyButton';
 
 function App() {
+  const [regionSelected, setRegionSelected] = useState('');
+  const [profiSelected, setProfiSelected] = useState('');
+
   const [modal, setModal] = useState(false);
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -25,6 +29,8 @@ function App() {
     { value: 4, label: 'Южные Гоа' },
     { value: 5, label: 'Северные Гоа' },
     { value: 6, label: 'Самуи' },
+    { value: 7, label: 'Нячанг' },
+
   ];
 
   const profi = [
@@ -41,11 +47,26 @@ function App() {
     { title: 'Войти', content: <InputList /> },
   ];
 
+  const variations = ['Выберете ваш регион', 'Выберете услугу'];
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout modal={modal} setModal={setModal} />}>
-          <Route index element={<HomePage arr1={profi} arr2={cities} />} />
+          <Route
+            index
+            element={(
+              <HomePage
+                regionSelected={regionSelected}
+                profiSelected={profiSelected}
+                setProfiSelected={setProfiSelected}
+                setRegionSelected={setRegionSelected}
+                variations={variations}
+                arr1={profi}
+                arr2={cities}
+              />
+)}
+          />
           <Route path="/spesialist/:id" element={<SpecialistPage />} />
           <Route path="/user/:id" element={<UserPage />} />
         </Route>
