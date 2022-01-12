@@ -3,7 +3,9 @@
 import { ComboBox, Tooltip } from '@skbkontur/react-ui';
 import { useState } from 'react';
 
-function InputList({ arr }) {
+function InputList({
+  arr, variations, selected, setSelected,
+}) {
   const delay = (time) => (args) => new Promise((resolve) => setTimeout(resolve, time, args));
 
   const getItems = (query) => Promise.resolve(arr
@@ -32,7 +34,6 @@ function InputList({ arr }) {
       };
     })).then(delay(500));
 
-  const [selected, setSelected] = useState('');
   const [error, setError] = useState(false);
 
   const handleValueChange = (value) => {
@@ -56,14 +57,14 @@ function InputList({ arr }) {
   };
   return (
 
-    <Tooltip closeButton={false} render={() => 'Необходимо выбрать ваш регион!'} trigger={error ? 'opened' : 'closed'}>
+    <Tooltip closeButton={false} render={() => variations} trigger={error ? 'opened' : 'closed'}>
       <ComboBox
         error={error}
         getItems={getItems}
         onValueChange={handleValueChange}
         onFocus={handleFocus}
         onUnexpectedInput={handleUnexpectedInput}
-        placeholder="Выберете ваш регион"
+        placeholder={variations}
         value={selected}
         renderItem={renderItem}
       />
