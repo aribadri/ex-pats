@@ -1,11 +1,13 @@
 import MyButton from '../UI/button/MyButton';
-import MyInput from '../UI/input/MyInput';
+import InputList from '../UI/combobox/InputList';
+// import MyInput from '../UI/input/MyInput';
 
-function HomePage() {
+function HomePage({ arr1, arr2 }) {
   return (
     <div>
       Welcome to ExPats.com
-      <MyInput />
+      <InputList arr={arr1} />
+      <InputList arr={arr2} />
       <MyButton>Find</MyButton>
     </div>
   );
