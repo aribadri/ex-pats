@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import MyButton from '../UI/button/MyButton';
 import InputList from '../UI/combobox/InputList';
+import Loader from '../UI/loader/Loader';
 // import MyInput from '../UI/input/MyInput';
 
 function HomePage({
@@ -16,7 +17,11 @@ function HomePage({
       <InputList arr={arr1} variations={variations[1]} selected={profiSelected} setSelected={setProfiSelected} />
       <InputList arr={arr2} variations={variations[0]} selected={regionSelected} setSelected={setRegionSelected} />
       <MyButton>Find</MyButton>
+      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Loader />
+      </span>
     </div>
+
   );
 }
 

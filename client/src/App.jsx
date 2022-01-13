@@ -5,15 +5,15 @@ import { Route, Routes } from 'react-router-dom';
 // import { ComboBox } from '@skbkontur/react-ui';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
-import SpecialistPage from './pages/SpecialistPage';
+import SpecialistPage from './pages/SpesialistPage';
 import UserPage from './pages/UserPage';
 import MyModal from './components/MyModal';
-import Loader from './UI/loader/Loader';
-// import LogiForm from './components/LoginForm';
+// import Loader from './UI/loader/Loader';
+import LoginForm from './components/LoginForm';
 // import RegForm from './components/RegForm';
 import Tabs from './UI/tabs/Tabs';
 import RegForm from './components/RegForm';
-import InputList from './UI/combobox/InputList';
+// import InputList from './UI/combobox/InputList';
 // import InputList from './UI/combobox/InputList';
 // import MyButton from './UI/button/MyButton';
 
@@ -42,9 +42,8 @@ function App() {
     { value: 6, label: 'Собутыльник' },
   ];
   const items = [
-    { title: 'Ищу услугу', content: <RegForm /> },
-    { title: 'Предлагаю услугу', content: <RegForm /> },
-    { title: 'Войти', content: <InputList /> },
+    { title: 'Зарегистрироваться', content: <RegForm /> },
+    { title: 'Войти', content: <LoginForm /> },
   ];
 
   const variations = ['Выберете ваш регион', 'Выберете услугу'];
@@ -67,16 +66,13 @@ function App() {
               />
 )}
           />
-          <Route path="/spesialist/:id" element={<SpecialistPage />} />
+          <Route path="/profi/:id" element={<SpecialistPage />} />
           <Route path="/user/:id" element={<UserPage />} />
         </Route>
       </Routes>
       <MyModal visible={modal} setModal={setModal}>
         <Tabs items={items} />
       </MyModal>
-      <div style={{ display: 'flex', alignItems: 'bottom', justifyContent: 'center' }}>
-        <Loader />
-      </div>
 
     </div>
   );
