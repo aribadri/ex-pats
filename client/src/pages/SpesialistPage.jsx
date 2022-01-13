@@ -1,9 +1,9 @@
-import '../components/Scrolllabel.css';
+import '../components/scrolllabel/Scrolllabel.css';
 import { useState } from 'react';
-import Scrollable from '../components/Scrolllabel';
-import About from '../components/About';
+import Scrollable from '../components/scrolllabel/Scrolllabel';
+import About from '../components/about/About';
 import Dialog from '../components/dialog/Dialog';
-import Contacts from '../components/Contacts';
+import Contacts from '../components/contacts/Contacts';
 // eslint-disable-next-line
 const Card = ({ el }) => {
   const [visible, setVisible] = useState(false);

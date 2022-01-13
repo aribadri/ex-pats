@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import MyButton from '../UI/button/MyButton';
+import MyButton from '../../UI/button/MyButton';
 // import Loader from '../UI/loader/Loader';
 
 // eslint-disable-next-line react/prop-types
