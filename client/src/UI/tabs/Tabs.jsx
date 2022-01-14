@@ -8,10 +8,10 @@ import TabContent from './TabContent';
 import './Tabs.css';
 
 function Tabs({ items }) {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState(1);
   const openTab = (e) => setActive(+e.target.dataset.index);
   return (
-    <div>
+    <div className="form-auth-container">
       <div className="tab">
         {items.map((n, i) => (
           <MyButton
@@ -21,7 +21,6 @@ function Tabs({ items }) {
             data-index={i}
           >
             {n.title}
-
           </MyButton>
         ))}
       </div>

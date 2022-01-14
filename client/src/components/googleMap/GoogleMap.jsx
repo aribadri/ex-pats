@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import About from '../about/About';
 
-const key1 = 'AIzaSyDa-5dY_WHV88yhCIAQOWuilBO1zL3dgRc';
+const key1 = 'AIzaSyAQUd8z6GRUADAmOn1CcNijqY0RFaSvoXw';
 const containerStyle = {
   width: '1139px',
   height: '336px',
@@ -41,7 +41,7 @@ function Google({ userCoordinat }) {
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={userCoordinat}
+          center={userCoordinat || { lat: '55.75115095562456', lng: '37.596928005819485' }}
           zoom={count}
         >
           <Marker
