@@ -42,8 +42,8 @@ function App() {
     { value: 6, label: 'Собутыльник' },
   ];
   const items = [
-    { title: 'Зарегистрироваться', content: <RegForm /> },
-    { title: 'Войти', content: <LoginForm /> },
+    { title: 'Зарегистрироваться', content: <RegForm setModal={setModal} /> },
+    { title: 'Войти', content: <LoginForm setModal={setModal} /> },
   ];
 
   const variations = ['Выберете ваш регион', 'Выберете услугу'];

@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import validator from 'validator';
+import { useNavigate } from 'react-router';
+import styles from './regForm.module.scss';
 
-function RegForm() {
-  const [register, setRegister] = useState(() => ({
-    username: '',
+function RegForm({ setModal }) {
+  const navigate = useNavigate();
+  const initialStateInputs = {
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     password2: '',
-  }));
-
+  };
+  const [register, setRegister] = useState(initialStateInputs);
   const changeInputRegister = (event) => {
     event.persist();
     setRegister((prev) => ({
@@ -17,52 +21,71 @@ function RegForm() {
       [event.target.name]: event.target.value,
     }));
   };
-  const DOMEN_SITE = 'http://localhost:3000';
+  const DOMEN_SITE = 'http://localhost:5000';
   const submitChackin = (event) => {
     event.preventDefault();
     if (!validator.isEmail(register.email)) {
       alert('You did not enter email');
     } else if (register.password !== register.password2) {
       alert('Repeated password incorrectly');
-    } else if (!validator.isStrongPassword(register.password, { minSymbols: 0 })) {
-      alert('Password must consist of one lowercase, uppercase letter and number, at least 8 characters');
+    } else if (!validator.isStrongPassword(
+      register.password,
+      {
+        minSymbols: 0, minLength: 1, minLowercase: 0, minUppercase: 0, minNumbers: 1,
+      },
+    )) {
+      alert('Password must consist of one lowercase, uppercase letter and number, at least 3 characters');
     } else {
-      axios.post(`${DOMEN_SITE}/auth/registration/`, {
-        username: register.username,
-        email: register.email,
-        password: register.password,
-      }).then((res) => {
-        if (res.data === true) {
-          window.location.href = `${DOMEN_SITE}/auth`;
-        } else {
-          alert('There is already a user with this email');
-        }
-      }).catch(() => {
-        alert('An error occurred on the server');
-      });
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      axios.post(`${DOMEN_SITE}/api/users/registration`, register, { headers, withCredentials: true })
+        .then((res) => {
+          setRegister(initialStateInputs);
+          if (res.data.message === 'Регистрация прошла успешно') {
+            navigate(`/profi/${res.data.user.id}`);
+            setModal(false);
+          } else if (res.data.message === 'Пользователь с таким именем уже существует') {
+            alert('Пользователь с таким именем уже существует');
+          } else if (res.data.message === 'Пользователь с такой фамилией уже существует') {
+            alert('Пользователь с такой фамилией уже существует');
+          } else if (res.data.message === 'Пользователь с такой почтой уже существует') {
+            alert('Пользователь с такой почтой уже существует');
+          }
+        }).catch(() => {
+          alert('На сервере произошла ошибка, попробуйте позже');
+        });
     }
   };
 
   return (
     <div className="form">
-      <h2>Register user:</h2>
       <form onSubmit={submitChackin}>
         <p>
-          Name:
-          {' '}
           <input
-            type="username"
-            id="username"
-            name="username"
-            value={register.usernamr}
+            className={styles.inputRegFormName}
+            placeholder="Имя"
+            type="first_name"
+            id="first_name"
+            name="first_name"
+            value={register.first_name}
             onChange={changeInputRegister}
           />
 
+          <input
+            className={`${styles.inputRegFormName} ${styles.inputRegFormLastName}`}
+            placeholder="Фамилия"
+            type="last_name"
+            id="last_name"
+            name="last_name"
+            value={register.last_name}
+            onChange={changeInputRegister}
+          />
         </p>
         <p>
-          Email:
-          {' '}
           <input
+            className={styles.inputRegFormEmailPass}
+            placeholder="Email"
             type="email"
             id="email"
             name="email"
@@ -73,9 +96,9 @@ function RegForm() {
 
         </p>
         <p>
-          Password:
-          {' '}
           <input
+            className={styles.inputRegFormEmailPass}
+            placeholder="Пароль"
             type="password"
             id="password"
             name="password"
@@ -85,9 +108,9 @@ function RegForm() {
 
         </p>
         <p>
-          Repeat password:
-          {' '}
           <input
+            className={styles.inputRegFormEmailPass}
+            placeholder="Повторите пароль"
             type="password"
             id="password2"
             name="password2"
@@ -96,7 +119,7 @@ function RegForm() {
           />
 
         </p>
-        <input type="submit" />
+        <button className={styles.btnRegForm} type="submit">Зарегистрироваться</button>
       </form>
     </div>
   );
