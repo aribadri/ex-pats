@@ -13,6 +13,7 @@
   font-size: 20px;
   line-height: 23px;
   text-decoration: none;
+  margin-right: 40px;
 }
 
 .myButtonLogin {
@@ -27,4 +28,25 @@
   line-height: 19px;
   letter-spacing: 0.03em;
   color: #FFFFFF;
+}
+
+.divLogoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.imgLocation {
+  margin-right: 5px;
+  width: 14px;
+  height: 20px;
+}
+
+.nameLocation {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+  color: #2F2A3E;
+  border-bottom: 2px dashed #000000;
 }

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import './App.css';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 // import { ComboBox } from '@skbkontur/react-ui';
 import Layout from './components/layout/Layout';
-import HomePage from './pages/HomePage';
+import { HomePage } from './pages/HomePage';
 import SpecialistPage from './pages/SpesialistPage';
 import UserPage from './pages/UserPage';
 import MyModal from './components/myModal/MyModal';
@@ -20,6 +21,8 @@ import RegForm from './components/regForm/RegForm';
 function App() {
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
+  const [userCity, setUserCity] = useState('');
+  const [userCoordinat, setUserCoordinat] = useState({});
 
   const [modal, setModal] = useState(false);
   const cities = [
@@ -42,8 +45,8 @@ function App() {
     { value: 6, label: 'Собутыльник' },
   ];
   const items = [
-    { title: 'Зарегистрироваться', content: <RegForm setModal={setModal} /> },
-    { title: 'Войти', content: <LoginForm setModal={setModal} /> },
+    { title: 'Зарегистрироваться', content: <RegForm setModal={setModal} location={userCoordinat} /> },
+    { title: 'Войти', content: <LoginForm setModal={setModal} location={userCoordinat} /> },
   ];
 
   const variations = ['Выберете ваш регион', 'Выберете услугу'];
@@ -51,11 +54,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Layout modal={modal} setModal={setModal} />}>
+        <Route path="/" element={<Layout userCity={userCity} modal={modal} setModal={setModal} />}>
           <Route
             index
             element={(
               <HomePage
+                userCoordinat={userCoordinat}
+                setUserCoordinat={setUserCoordinat}
+                userCity={userCity}
+                setUserCity={setUserCity}
                 regionSelected={regionSelected}
                 profiSelected={profiSelected}
                 setProfiSelected={setProfiSelected}
@@ -64,7 +71,7 @@ function App() {
                 arr1={profi}
                 arr2={cities}
               />
-)}
+            )}
           />
           <Route path="/profi/:id" element={<SpecialistPage />} />
           <Route path="/user/:id" element={<UserPage />} />

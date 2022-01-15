@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
       return res.json({ message: 'Ошибка при регистрации', errors });
     }
     const {
-      first_name, last_name, email, password,
+      first_name, last_name, email, password, latitude, longitude,
     } = req.body;
     console.log(req.body, 'req body register');
     const candidateFirstName = await User.findOne({ where: { first_name } });
@@ -33,7 +33,12 @@ router.post('/', async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 7);
 
     const newUser = await User.create({
-      first_name, last_name, email, password: hashPassword,
+      first_name,
+      last_name,
+      email,
+      password: hashPassword,
+      latitude,
+      longitude,
     });
 
     const userDto = new UserDto(newUser);

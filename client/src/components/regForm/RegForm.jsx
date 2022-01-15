@@ -4,7 +4,8 @@ import validator from 'validator';
 import { useNavigate } from 'react-router';
 import styles from './regForm.module.scss';
 
-function RegForm({ setModal }) {
+function RegForm({ setModal, location }) {
+  console.log(location, 'sdfsdf');
   const navigate = useNavigate();
   const initialStateInputs = {
     first_name: '',
@@ -12,6 +13,8 @@ function RegForm({ setModal }) {
     email: '',
     password: '',
     password2: '',
+    latitude: location.lat,
+    longitude: location.lng,
   };
   const [register, setRegister] = useState(initialStateInputs);
   const changeInputRegister = (event) => {

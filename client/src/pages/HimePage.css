@@ -1,0 +1,34 @@
+.homepage-background {
+  display: flex;
+  position: relative;
+  width: 1139px;
+  height: 336px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+ 
+
+  
+  background-image: url(https://wallpapershome.ru/images/pages/pic_h/6484.jpg);
+  /* mix-blend-mode: normal; */
+  -webkit-background-size: 100%;
+  
+}
+.homepage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-map {
+  display: flex;
+  width: 400px;
+  margin-top: 40px;
+  /* position: relative; */
+  /* top: 195px; */
+  align-items: center;
+  justify-content: center;
+}

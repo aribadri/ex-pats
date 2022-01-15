@@ -18,19 +18,19 @@ function InputList({
         ...rest,
         label,
         highlightedLabel:
-            start >= 0 ? (
-              <span>
-                {label.substring(0, start)}
-                <strong
-                  style={{
-                    fontSize: '1.1em',
-                  }}
-                >
-                  {label.substring(start, end)}
-                </strong>
-                {label.substring(end)}
-              </span>
-            ) : null,
+          start >= 0 ? (
+            <span>
+              {label.substring(0, start)}
+              <strong
+                style={{
+                  fontSize: '1.1em',
+                }}
+              >
+                {label.substring(start, end)}
+              </strong>
+              {label.substring(end)}
+            </span>
+          ) : null,
       };
     })).then(delay(500));
 
@@ -59,6 +59,10 @@ function InputList({
 
     <Tooltip closeButton={false} render={() => variations} trigger={error ? 'opened' : 'closed'}>
       <ComboBox
+        style={{ hight: '300px' }}
+        width="700px"
+        height="300px"
+        size="large"
         error={error}
         getItems={getItems}
         onValueChange={handleValueChange}

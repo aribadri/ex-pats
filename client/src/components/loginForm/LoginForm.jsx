@@ -6,7 +6,7 @@ import axios from 'axios';
 import validator from 'validator';
 import styles from '../regForm/regForm.module.scss';
 
-function LogiForm({ setModal }) {
+function LogiForm({ setModal, location }) {
   const navigate = useNavigate();
   // const [register, setRegister] = useState(() => ({
   //   email: '',
@@ -16,6 +16,8 @@ function LogiForm({ setModal }) {
   const initialStateInputs = {
     email: '',
     password: '',
+    latitude: location.lat,
+    longitude: location.lng,
   };
   const [register, setRegister] = useState(initialStateInputs);
 
@@ -43,6 +45,7 @@ function LogiForm({ setModal }) {
       };
       axios.post(`${DOMEN_SITE}/api/users/login`, register, { headers, withCredentials: true })
         .then((res) => {
+          console.log(res);
           setRegister(initialStateInputs);
           if (res.data.message === 'Авторизация прошла успешно') {
             navigate(`/profi/${res.data.user.id}`);
@@ -51,6 +54,9 @@ function LogiForm({ setModal }) {
             alert('Пользователь не найден');
           } else if (res.data.message === 'Введен неверный пароль') {
             alert('Введен неверный пароль');
+          } else if (res.data.message === 'Авторизация прошла успешно, локация не изменилась') {
+            navigate(`/profi/${res.data.user.id}`);
+            setModal(false);
           }
         }).catch(() => {
           alert('На сервере произошла ошибка, попробуйте позже');
