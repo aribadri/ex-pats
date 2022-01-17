@@ -9,12 +9,13 @@ import { useEffect } from 'react';
 
 import axios from 'axios';
 import InputList from '../UI/combobox/InputList';
-// import Loader from '../UI/loader/Loader';
+import Loader from '../UI/loader/Loader';
 import './HimePage.css';
 // import GoogleMap from '../components/googleMap/GoogleMap';
 // import MyInput from '../UI/input/MyInput';
 import Google from '../components/googleMap/GoogleMap';
 import MyButton from '../UI/button/MyButton';
+import ProfiList from '../components/profilist/ProfiList';
 
 function HomePage({
   arr1, arr2, variations, profiSelected, setProfiSelected, regionSelected, setRegionSelected, userCity, setUserCity, setUserCoordinat, userCoordinat,
@@ -40,18 +41,16 @@ function HomePage({
             size="large"
             use="primary"
           >
-Find
-
+            Find
           </Button>
-
         </Gapped>
-
       </div>
       <div className="container-map">
         <Google userCoordinat={userCoordinat} />
       </div>
+      <ProfiList />
+      <Loader />
     </div>
-
   );
 }
 
