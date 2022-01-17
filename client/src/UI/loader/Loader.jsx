@@ -4,7 +4,7 @@ import './Loader.css';
 
 function Loader() {
   return (
-    <div className="lds-circle"><div><h3>Loading...</h3></div></div>
+    <div className="lds-circle"><div className="loader-text">wait...</div></div>
   );
 }
 
