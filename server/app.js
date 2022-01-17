@@ -1,13 +1,18 @@
 const express = require('express');
 const logger = require('morgan');
-// const path = require('path');
+const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cockieParser = require('cookie-parser');
+require('dotenv').config();
+const { check } = require('express-validator');
+
+const registerRouter = require('./routers/registration/registerRouter');
+const loginRouter = require('./routers/login/loginRouter');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+
 const sessionConfig = {
   store: new FileStore(),
   name: 'sid',
@@ -26,7 +31,7 @@ app.use(
     credentials: true,
   }),
 );
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(express.urlencoded({
   extended: true,
@@ -35,6 +40,14 @@ app.use(express.json());
 app.use(cockieParser());
 app.use(session(sessionConfig));
 
-app.listen(PORT, () => {
-  console.log(`server started PORT: ${PORT}`);
-});
+// роутер регистрации с валидацией полей: first_name, last_name, email, password
+app.use('/api/users/registration', [
+  check('first_name', 'Имя пользователя не должно быть пустым').notEmpty(),
+  check('last_name', 'Фамилия пользователя не должна быть пустым').notEmpty(),
+  check('email', 'Email пользователя не должен быть пустым').notEmpty(),
+  check('password', 'Пароль не может быть меньше 3 символов').isLength({ min: 3 }),
+], registerRouter);
+
+app.use('/api/users/login', loginRouter);
+
+module.exports = app;

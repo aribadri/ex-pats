@@ -1,0 +1,47 @@
+.formLoginDisplayFlex {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.inputRegFormName {
+  height: 50px;
+  width: 240px;
+  background: none;
+  border: 2px solid #D6D6D6;
+  padding-left: 10px;
+  margin-top: 50px;
+  outline: none;
+} 
+
+.inputRegFormLastName {
+  margin-left: 10px;
+} 
+
+.inputRegFormEmailPass {
+  width: 490px;
+  height: 50px;
+  background: none;
+  border: 2px solid #D6D6D6;
+  padding-left: 10px;
+  margin-top: 20px;
+  outline: none;
+} 
+
+.btnRegForm {
+  margin-top: 30px;
+  width: 174px;
+  height: 19px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.06em;  
+  color: #FFFFFF;
+  height: 50px;
+  width: 383px;
+  background: #2F2A3E;
+  border-radius: 25px;
+  border: none;
+}

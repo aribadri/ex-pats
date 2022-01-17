@@ -2,10 +2,7 @@
 // import RegForm from '../../components/RegForm';
 import './Tabs.css';
 
-function TabContent({ title, content }) {
-  console.log(content);
-  console.log(title);
-
+function TabContent({ content }) {
   return (
     <div className="tabcontent">
       { content }
