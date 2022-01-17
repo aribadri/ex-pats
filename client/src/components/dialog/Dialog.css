@@ -24,7 +24,7 @@
   
   .dialog-overlay{
     padding: 24px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
   
     background: #ffffff;
     border-radius: 2px;

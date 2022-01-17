@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 // import { ComboBox } from '@skbkontur/react-ui';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
-import SpecialistPage from './pages/SpesialistPage';
+import { SpecialistPage } from './pages/SpesialistPage';
 import UserPage from './pages/UserPage';
 import MyModal from './components/myModal/MyModal';
 // import Loader from './UI/loader/Loader';
@@ -16,12 +16,16 @@ import RegForm from './components/regForm/RegForm';
 // import InputList from './UI/combobox/InputList';
 // import InputList from './UI/combobox/InputList';
 // import MyButton from './UI/button/MyButton';
+import Chat from './components/chat/Chat';
 
 function App() {
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
 
   const [modal, setModal] = useState(false);
+  const [modalFeedBack, setModalFeedBack] = useState(false);
+  const [modalWorkCard, setmodalWorkCard] = useState(false);
+
   const cities = [
     { value: 1, label: 'Пхукет' },
     { value: 2, label: 'Паттайя' },
@@ -66,8 +70,9 @@ function App() {
               />
 )}
           />
-          <Route path="/profi/:id" element={<SpecialistPage />} />
+          <Route path="/profi/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
           <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/chat" element={<Chat />} />
         </Route>
       </Routes>
       <MyModal visible={modal} setModal={setModal}>
