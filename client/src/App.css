@@ -79,10 +79,15 @@ select {
   }
 }
 
-/* .App {
-  text-align: center;
+.App {
+  width: 1139px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  font-family: Roboto;
 }
 
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -117,11 +122,6 @@ select {
     transform: rotate(360deg);
   }
 } */
-
-.App {
-  text-align: center;
-  font-family: Roboto;
-}
 
 /* .App-header a {
   color:rgb(250, 245, 245);

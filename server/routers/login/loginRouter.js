@@ -6,9 +6,10 @@ const UserDto = require('../../dtos/userDtos');
 router.post('/', async (req, res) => {
   try {
     const {
-      email, password, latitude, longitude,
+      email, password, latitude, longitude, user_city, user_country,
     } = req.body;
     console.log(req.body, 'req.body login');
+    console.log({ user_city, user_country });
     const user = await User.findOne({ where: { email } });
     console.log(user, 'login user ');
     if (!user) {
@@ -21,18 +22,14 @@ router.post('/', async (req, res) => {
       return res.json({ message: 'Введен неверный пароль' });
     }
 
-    if (longitude && latitude) {
-      // console.log(longitude, 'существует');
-      console.log('tessstt');
-      // console.log(latitude, 'latitude существует');
-    }
-
     // проверка на пустые значения
     if ((longitude !== '' && latitude !== '')
     || (longitude !== ' ' && latitude !== ' ')) {
       const locationToUpdate = {
         longitude,
         latitude,
+        user_city,
+        user_country,
       };
 
       // обновляем локацию
@@ -44,23 +41,24 @@ router.post('/', async (req, res) => {
 
       // если локация не изменилась
       if (updateLocation[0] === 0) {
-        // создаем сессию
-        req.session.name = user.dataValues.id;
         const userDto = new UserDto(user);
+        console.log(userDto, 'userDto data');
+        // создаем сессию
+        req.session.user = userDto;
         return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto });
       }
 
       // изменили локацию и отправили на клиент новые данные
       const userDto = new UserDto(updateLocation[1][0]);
-      console.log(userDto, 'update if str 43');
-      req.session.name = user.dataValues.id;
+      req.session.user = userDto;
       return res.json({ message: 'Авторизация прошла успешно', user: userDto });
     }
 
-    // если пришли пустые значения широты и долготы
-    // создаем сессию
-    req.session.name = user.dataValues.id;
     const userDto = new UserDto(user);
+
+    // создаем сессию
+    req.session.user = userDto;
+
     return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto });
   } catch (error) {
     return res.json(error);

@@ -2,11 +2,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import './App.css';
+import { useState, useEffect } from 'react';
 
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import globalContext from './context/GlobalContext';
 // import { ComboBox } from '@skbkontur/react-ui';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import globalContext from './context/GlobalContext';
 import Layout from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
 import { SpecialistPage } from './pages/SpesialistPage';
@@ -20,18 +22,35 @@ import RegForm from './components/regForm/RegForm';
 // import InputList from './UI/combobox/InputList';
 // import InputList from './UI/combobox/InputList';
 // import MyButton from './UI/button/MyButton';
+import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
 
 function App() {
+  const dispatch = useDispatch();
+
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
-  const [userCoordinat, setUserCoordinat] = useState({});
-
   const [modal, setModal] = useState(false);
   const [modalFeedBack, setModalFeedBack] = useState(false);
   const [modalWorkCard, setmodalWorkCard] = useState(false);
-
   const [profiList, setProfiList] = useState();
+  const [userCoordinat, setUserCoordinat] = useState({});
+  console.log(userCoordinat, 'userCoordinat app ');
+
+  useEffect(() => {
+    const getLocation = async () => {
+      const data = await axios.get('https://json.geoiplookup.io');
+      console.log(data, 'coordinats');
+      setUserCoordinat({
+        lat: data.data.latitude, lng: data.data.longitude, city: data.data.city, country: data.data.country_name,
+      });
+    };
+    getLocation();
+
+    axios.get('http://localhost:5000/api/me', { withCredentials: true })
+      .then((res) => res.data)
+      .then((loggedUserData) => dispatch(actions.loginUserSuccess(loggedUserData)));
+  }, [dispatch]);
 
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -125,8 +144,8 @@ function App() {
                 />
               )}
             />
-            <Route path="/profi/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
-            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/users/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
+            <Route path="/users/:id/profile" element={<UserPage />} />
             <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>

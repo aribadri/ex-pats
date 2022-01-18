@@ -26,5 +26,10 @@ module.exports = {
     'linebreak-style': 0,
     'no-alert': 'off',
     'no-console': 'off',
+    'default-param-last': 'off',
+    'no-unused-vars': 'off',
+    'no-unused-expressions': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'no-underscore-dangle': 'off',
   },
 };

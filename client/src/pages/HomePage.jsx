@@ -20,7 +20,7 @@ import ProfiList from '../components/profilist/ProfiList';
 import globalContext from '../context/GlobalContext';
 
 function HomePage({
-  arr1, variations, profiSelected, setProfiSelected, setUserCoordinat, userCoordinat,
+  arr1, variations, profiSelected, setProfiSelected, userCoordinat,
 }) {
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
@@ -29,17 +29,17 @@ function HomePage({
     setProfiList(data.data);
   }
 
-  useEffect(() => {
-    console.log('inside useeffect');
-    const getLocation = async () => {
-      const data = await axios.get('https://json.geoiplookup.io');
-      console.log(data, 'coordinats');
-      setUserCoordinat({
-        lat: data.data.latitude, lng: data.data.longitude, city: data.data.city, country: data.data.country_name,
-      });
-    };
-    getLocation();
-  }, []);
+  // useEffect(() => {
+  //   console.log('inside useeffect');
+  // const getLocation = async () => {
+  //   const data = await axios.get('https://json.geoiplookup.io');
+  //   console.log(data, 'coordinats');
+  //   setUserCoordinat({
+  //     lat: data.data.latitude, lng: data.data.longitude, city: data.data.city, country: data.data.country_name,
+  //   });
+  // };
+  // getLocation();
+  // }, []);
 
   // console.log(userCity);
   console.log(userCoordinat);

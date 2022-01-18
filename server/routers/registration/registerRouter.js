@@ -11,7 +11,9 @@ router.post('/', async (req, res) => {
       return res.json({ message: 'Ошибка при регистрации', errors });
     }
     const {
-      first_name, last_name, email, password, latitude, longitude,
+      first_name, last_name, email,
+      password, latitude, longitude,
+      user_city, user_country,
     } = req.body;
     console.log(req.body, 'req body register');
     const candidateFirstName = await User.findOne({ where: { first_name } });
@@ -39,14 +41,14 @@ router.post('/', async (req, res) => {
       password: hashPassword,
       latitude,
       longitude,
+      user_city,
+      user_country,
     });
 
     const userDto = new UserDto(newUser);
-    console.log(newUser, 'новый юзер сохраненный в БД');
-    console.log(userDto, 'юзер dtoS');
 
     // создаем сессию
-    req.session.name = newUser.dataValues.id;
+    req.session.user = userDto;
 
     return res.json({ message: 'Регистрация прошла успешно', user: userDto });
   } catch (error) {
