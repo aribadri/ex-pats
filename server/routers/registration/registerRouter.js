@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     const {
       first_name, last_name, email, password, latitude, longitude,
     } = req.body;
-    console.log(req.body, 'req body register');
+    // console.log(req.body, 'req body register');
     const candidateFirstName = await User.findOne({ where: { first_name } });
     const candidateLastName = await User.findOne({ where: { last_name } });
     const candidateEmail = await User.findOne({ where: { email } });
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     });
 
     const userDto = new UserDto(newUser);
-    console.log(newUser, 'новый юзер сохраненный в БД');
+    // console.log(newUser, 'новый юзер сохраненный в БД');
     console.log(userDto, 'юзер dtoS');
 
     // создаем сессию

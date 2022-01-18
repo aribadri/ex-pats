@@ -28,6 +28,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [modalFeedBack, setModalFeedBack] = useState(false);
   const [modalWorkCard, setmodalWorkCard] = useState(false);
+  const [StartChat, setStartChat] = useState(false);
 
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -77,7 +78,19 @@ function App() {
               />
             )}
           />
-          <Route path="/profi/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
+          <Route
+            path="/profi/:id"
+            element={(
+              <SpecialistPage
+                visible={modalFeedBack}
+                setModal={setModalFeedBack}
+                visibleWorkCard={modalWorkCard}
+                setmodalWorkCard={setmodalWorkCard}
+                visibleStartChat={StartChat}
+                setStartChat={setStartChat}
+              />
+)}
+          />
           <Route path="/user/:id" element={<UserPage />} />
           <Route path="/chat" element={<Chat />} />
         </Route>

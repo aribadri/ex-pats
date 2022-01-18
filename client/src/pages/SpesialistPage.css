@@ -184,3 +184,7 @@
     background: red;
     height: 100px;
 }
+
+.form-sendMessage{
+display: flex;
+}
