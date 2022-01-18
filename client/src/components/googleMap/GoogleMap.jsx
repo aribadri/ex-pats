@@ -55,7 +55,7 @@ function Google({ userCoordinat }) {
                 position={{ lat: Number(profi.lat), lng: Number(profi.lng) }}
                 label={profi.name}
                 clusterer={clusterer}
-                onClick={() => navigate(`/profi/${profi.id}`)}
+                onClick={() => navigate(`/users/${profi.id}`)}
                 title={profi.name}
 
               />
