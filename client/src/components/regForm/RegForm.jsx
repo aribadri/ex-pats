@@ -19,6 +19,8 @@ function RegForm({ setModal, location }) {
     password2: '',
     latitude: location.lat,
     longitude: location.lng,
+    user_country: location.country,
+    user_city: location.city,
   };
 
   const [register, setRegister] = useState(initialStateInputs);

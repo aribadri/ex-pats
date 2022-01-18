@@ -6,9 +6,10 @@ const UserDto = require('../../dtos/userDtos');
 router.post('/', async (req, res) => {
   try {
     const {
-      email, password, latitude, longitude,
+      email, password, latitude, longitude, user_city, user_country,
     } = req.body;
     console.log(req.body, 'req.body login');
+    console.log({ user_city, user_country });
     const user = await User.findOne({ where: { email } });
     console.log(user, 'login user ');
     if (!user) {
@@ -27,6 +28,8 @@ router.post('/', async (req, res) => {
       const locationToUpdate = {
         longitude,
         latitude,
+        user_city,
+        user_country,
       };
 
       // обновляем локацию

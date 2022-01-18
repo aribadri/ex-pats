@@ -1,9 +1,16 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable semi */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap, LoadScript, Marker, MarkerClusterer,
+} from '@react-google-maps/api';
+import globalContext from '../../context/GlobalContext';
 import About from '../about/About';
 
 const key1 = 'AIzaSyAQUd8z6GRUADAmOn1CcNijqY0RFaSvoXw';
@@ -13,17 +20,10 @@ const containerStyle = {
 };
 
 function Google({ userCoordinat }) {
+  console.log(userCoordinat);
+  const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  // function zoomNumbers() {
-  //   setTimeout(() => {
-  //     if (count < 11) {
-  //       setCount((prev) => prev + 1);
-  //     } else {
-  //       setCount(10);
-  //     }
-  //   }, 500);
-  // }
-
+  const { profiList1 } = useContext(globalContext);
   function zoomNumbers() {
     let number;
     for (let i = 1; i < 11; i++) {
@@ -34,6 +34,10 @@ function Google({ userCoordinat }) {
   setTimeout(() => {
     setCount(zoomNumbers());
   }, 3000);
+
+  // navigateToProfi = () => {
+
+  // }
   return (
     <div>
       <LoadScript
@@ -41,19 +45,23 @@ function Google({ userCoordinat }) {
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={userCoordinat || { lat: '55.75115095562456', lng: '37.596928005819485' }}
+          center={userCoordinat ? { lat: userCoordinat.lat, lng: userCoordinat.lng } : { lat: 55, lng: 37 }}
           zoom={count}
         >
-          <Marker
-            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            position={userCoordinat}
-            label="Собутыльник"
-          />
-          <Marker
-            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            position={userCoordinat}
-            label="Педик"
-          />
+          <MarkerClusterer title="Hello">
+            {(clusterer) => profiList1.map((profi) => (
+              <Marker
+                key={profi.id}
+                position={{ lat: Number(profi.lat), lng: Number(profi.lng) }}
+                label={profi.name}
+                clusterer={clusterer}
+                onClick={() => navigate(`/profi/${profi.id}`)}
+                title={profi.name}
+
+              />
+            ))}
+          </MarkerClusterer>
+
         </GoogleMap>
       </LoadScript>
     </div>
