@@ -19,11 +19,10 @@ const containerStyle = {
   height: '336px',
 };
 
-function Google({ userCoordinat }) {
+function Google({ userCoordinat, listForMap }) {
   console.log(userCoordinat);
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  const { profiList1 } = useContext(globalContext);
   function zoomNumbers() {
     let number;
     for (let i = 1; i < 11; i++) {
@@ -38,6 +37,17 @@ function Google({ userCoordinat }) {
   // navigateToProfi = () => {
 
   // }
+  function logoOnMap(link) {
+    const iconPin = {
+
+      url: `http://localhost:5000/${link}`,
+      size: new window.google.maps.Size(50, 50),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(0, 32),
+      scaledSize: new window.google.maps.Size(40, 40),
+    };
+    return iconPin
+  }
   return (
     <div>
       <LoadScript
@@ -48,16 +58,19 @@ function Google({ userCoordinat }) {
           center={userCoordinat ? { lat: userCoordinat.lat, lng: userCoordinat.lng } : { lat: 55, lng: 37 }}
           zoom={count}
         >
-          <MarkerClusterer title="Hello">
-            {(clusterer) => profiList1.map((profi) => (
+          <MarkerClusterer>
+            {(clusterer) => listForMap.map((profi) => (
               <Marker
                 key={profi.id}
-                position={{ lat: Number(profi.lat), lng: Number(profi.lng) }}
-                label={profi.name}
+                position={{ lat: Number(profi.latitude), lng: Number(profi.longitude) }}
+                label={profi.first_name}
                 clusterer={clusterer}
                 onClick={() => navigate(`/users/${profi.id}`)}
-                title={profi.name}
-
+                title={profi.first_name}
+                animation={window.google.maps.Animation.DROP}
+                icon={logoOnMap(profi.avatar_link)}
+                style={{ borderRadius: '50%' }}
+                optimized="false"
               />
             ))}
           </MarkerClusterer>

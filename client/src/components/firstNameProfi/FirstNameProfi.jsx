@@ -1,9 +1,9 @@
 import React from 'react';
 
-function FirstNameProfi() {
+function FirstNameProfi({ user }) {
   return (
     <div>
-      Иван
+      {user.first_name}
     </div>
   );
 }
