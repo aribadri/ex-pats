@@ -1,0 +1,76 @@
+.divPortfolioContainer {
+  margin-top: 50px;
+}
+
+.divUploadsPortfolioContainer {
+  height: 200px;
+  width: 272px;
+  cursor: pointer;
+  border: 2px dashed #acacac;
+  box-sizing: border-box;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.portfolioTitle {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 27px;
+  color: #2F2A3E;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+
+.imgUpload {
+  width: 350px;
+  height: 241px;
+  // margin: 0px 10px 0px 10px
+  // align-self: flex-start;
+}
+
+.divAllPortfolioImgContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  // flex-flow: column wrap;
+  // align-items: flex-start;
+  // margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.divPortfolioImgContainer {
+  margin-top: 40px;
+  position: relative;
+}
+
+.divDeleteImg {
+  top: 0px;
+  left: 320px;
+  background-color: white;
+  cursor: pointer;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+  }
+  .divDeleteImg:hover {
+  opacity: 1;
+  }
+  .divDeleteImg:before, .divDeleteImg:after {
+  position: absolute;
+  left: 14px;
+  content: ' ';
+  height: 30px;
+  width: 3px;
+  background-color: #E57377;
+  }
+  .divDeleteImg:before {
+  transform: rotate(45deg);
+  }
+  .divDeleteImg:after {
+  transform: rotate(-45deg);
+  }

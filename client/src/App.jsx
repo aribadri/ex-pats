@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 // import { ComboBox } from '@skbkontur/react-ui';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import Layout from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
 import SpecialistPage from './pages/SpesialistPage';
@@ -17,13 +19,22 @@ import RegForm from './components/regForm/RegForm';
 // import InputList from './UI/combobox/InputList';
 // import InputList from './UI/combobox/InputList';
 // import MyButton from './UI/button/MyButton';
+import * as actions from './store/actions/userAction';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/me', { withCredentials: true })
+      .then((res) => res.data)
+      .then((loggedUserData) => dispatch(actions.loginUserSuccess(loggedUserData)));
+  }, [dispatch]);
+
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
   const [userCity, setUserCity] = useState('');
   const [userCoordinat, setUserCoordinat] = useState({});
-
+  console.log(userCoordinat, 'userCoordinat app ');
   const [modal, setModal] = useState(false);
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -73,8 +84,8 @@ function App() {
               />
             )}
           />
-          <Route path="/profi/:id" element={<SpecialistPage />} />
-          <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/users/:id" element={<SpecialistPage />} />
+          <Route path="/users/:id/profile" element={<UserPage />} />
         </Route>
       </Routes>
       <MyModal visible={modal} setModal={setModal}>

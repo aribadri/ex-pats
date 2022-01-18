@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import validator from 'validator';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 import styles from './regForm.module.scss';
+import { loginUserSuccess } from '../../store/actions/userAction';
 
 function RegForm({ setModal, location }) {
+  const dispatch = useDispatch();
+
   console.log(location, 'sdfsdf');
   const navigate = useNavigate();
   const initialStateInputs = {
@@ -16,6 +20,7 @@ function RegForm({ setModal, location }) {
     latitude: location.lat,
     longitude: location.lng,
   };
+
   const [register, setRegister] = useState(initialStateInputs);
   const changeInputRegister = (event) => {
     event.persist();
@@ -46,7 +51,8 @@ function RegForm({ setModal, location }) {
         .then((res) => {
           setRegister(initialStateInputs);
           if (res.data.message === 'Регистрация прошла успешно') {
-            navigate(`/profi/${res.data.user.id}`);
+            dispatch(loginUserSuccess(res.data.user));
+            navigate(`/users/${res.data.user.id}/profile`);
             setModal(false);
           } else if (res.data.message === 'Пользователь с таким именем уже существует') {
             alert('Пользователь с таким именем уже существует');

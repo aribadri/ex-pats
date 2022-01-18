@@ -42,11 +42,9 @@ router.post('/', async (req, res) => {
     });
 
     const userDto = new UserDto(newUser);
-    console.log(newUser, 'новый юзер сохраненный в БД');
-    console.log(userDto, 'юзер dtoS');
 
     // создаем сессию
-    req.session.name = newUser.dataValues.id;
+    req.session.user = userDto;
 
     return res.json({ message: 'Регистрация прошла успешно', user: userDto });
   } catch (error) {
