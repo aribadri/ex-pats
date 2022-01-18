@@ -25,12 +25,13 @@ import Chat from './components/chat/Chat';
 function App() {
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
-  const [userCity, setUserCity] = useState('');
   const [userCoordinat, setUserCoordinat] = useState({});
 
   const [modal, setModal] = useState(false);
   const [modalFeedBack, setModalFeedBack] = useState(false);
   const [modalWorkCard, setmodalWorkCard] = useState(false);
+
+  const [profiList, setProfiList] = useState();
 
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -58,7 +59,7 @@ function App() {
 
   const variations = ['Выберете ваш регион', 'Выберете услугу'];
 
-  const profiList = [
+  const profiList1 = [
     {
       id: 1,
       name: 'Берды алаверды',
@@ -101,18 +102,19 @@ function App() {
 
   return (
     <div className="App">
-      <globalContext.Provider value={{ profiList }}>
+      <globalContext.Provider value={{
+        profiList, setProfiList, profiSelected, profiList1,
+      }}
+      >
 
         <Routes>
-          <Route path="/" element={<Layout userCity={userCity} modal={modal} setModal={setModal} />}>
+          <Route path="/" element={<Layout location={userCoordinat} modal={modal} setModal={setModal} />}>
             <Route
               index
               element={(
                 <HomePage
                   userCoordinat={userCoordinat}
                   setUserCoordinat={setUserCoordinat}
-                  userCity={userCity}
-                  setUserCity={setUserCity}
                   regionSelected={regionSelected}
                   profiSelected={profiSelected}
                   setProfiSelected={setProfiSelected}

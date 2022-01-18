@@ -6,7 +6,7 @@ import imgLocation from '../../assets/img/location.png';
 import styles from './layout.module.scss';
 
 // eslint-disable-next-line react/prop-types
-function Layout({ setModal, userCity }) {
+function Layout({ setModal, location }) {
   return (
     <>
       <header className={styles.layoutHeader}>
@@ -14,7 +14,7 @@ function Layout({ setModal, userCity }) {
           <Link className={styles.linkHomePage} to="/">Xpat</Link>
           <img className={styles.imgLocation} src={imgLocation} alt="" />
           {/* {userCity} */}
-          <p className={styles.nameLocation}>{userCity || 'Moscow'}</p>
+          <p className={styles.nameLocation}>{`${location.country}, ${location.city}` || 'Russia, Moscow'}</p>
         </div>
         <MyButton type="button" className={styles.myButtonLogin} onClick={() => setModal(true)}>Войти</MyButton>
         {/* <Loader /> */}

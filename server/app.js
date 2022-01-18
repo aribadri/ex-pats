@@ -10,6 +10,8 @@ const { check } = require('express-validator');
 
 const registerRouter = require('./routers/registration/registerRouter');
 const loginRouter = require('./routers/login/loginRouter');
+const usersRouter = require('./routers/users/usersRouter');
+
 
 const app = express();
 
@@ -49,5 +51,7 @@ app.use('/api/users/registration', [
 ], registerRouter);
 
 app.use('/api/users/login', loginRouter);
+app.use('/api/users', usersRouter);
+
 
 module.exports = app;

@@ -6,17 +6,17 @@ function ProfiListItem({ profi }) {
 
   return (
     <div className="proItem" onClick={() => navigate(`/profi/${profi.id}`)}>
-      <img src={profi.avatar} width="200px" height="150px" alt={profi.name} />
+      {/* <img src={profi.avatar} width="200px" height="150px" alt={profi.name} /> */}
       <div>
-        {profi.name}
+        {profi.id}
       </div>
       <div>
-        <strong>
+        {/* <strong>
           {' '}
           {profi.spesiality}
-        </strong>
+        </strong> */}
       </div>
-      <div><i>{`«${profi.description}»`}</i></div>
+      {/* <div><i>{`«${profi.description}»`}</i></div> */}
     </div>
   );
 }
