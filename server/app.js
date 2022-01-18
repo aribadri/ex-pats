@@ -15,6 +15,7 @@ const authRouter = require('./routers/auth/authRouter');
 const uploadPortfolioRouter = require('./routers/uploadsRouter/uploadPortfolioRouter');
 const getAllPortfolioRouter = require('./routers/uploadsRouter/getAllPortfolioRouter');
 const usersRouter = require('./routers/users/usersRouter');
+const logoutRouter = require('./routers/logoutRouter');
 
 const app = express();
 
@@ -58,6 +59,8 @@ app.use('/api/upload', uploadsRouter);
 app.use('/api/upload/portfolio', uploadPortfolioRouter);
 app.use('/api/portfolio/', getAllPortfolioRouter);
 app.use('/api/me', authRouter);
+app.use('/api/logout', logoutRouter);
+
 app.use('/api/users', usersRouter);
 
 module.exports = app;

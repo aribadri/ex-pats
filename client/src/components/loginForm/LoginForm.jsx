@@ -11,11 +11,6 @@ import { loginUserSuccess } from '../../store/actions/userAction';
 function LogiForm({ setModal, location }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [register, setRegister] = useState(() => ({
-  //   email: '',
-  //   password: '',
-  // }));
-  console.log(location);
   const initialStateInputs = {
     email: '',
     password: '',

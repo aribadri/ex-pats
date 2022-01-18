@@ -6,14 +6,12 @@
 /* eslint-disable max-len */
 // import MyButton from '../UI/button/MyButton';
 import { Gapped, Button } from '@skbkontur/react-ui';
-import { useEffect, useContext, useParams } from 'react';
+import { useContext } from 'react';
 
 import axios from 'axios';
 import InputList from '../UI/combobox/InputList';
 import Loader from '../UI/loader/Loader';
 import './HimePage.css';
-// import GoogleMap from '../components/googleMap/GoogleMap';
-// import MyInput from '../UI/input/MyInput';
 import Google from '../components/googleMap/GoogleMap';
 import MyButton from '../UI/button/MyButton';
 import ProfiList from '../components/profilist/ProfiList';
@@ -25,24 +23,8 @@ function HomePage({
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
     const data = await axios.get(`http://localhost:5000/api/users/${profiSelected.label}`);
-    console.log(data.data);
     setProfiList(data.data);
   }
-
-  // useEffect(() => {
-  //   console.log('inside useeffect');
-  // const getLocation = async () => {
-  //   const data = await axios.get('https://json.geoiplookup.io');
-  //   console.log(data, 'coordinats');
-  //   setUserCoordinat({
-  //     lat: data.data.latitude, lng: data.data.longitude, city: data.data.city, country: data.data.country_name,
-  //   });
-  // };
-  // getLocation();
-  // }, []);
-
-  // console.log(userCity);
-  console.log(userCoordinat);
   return (
     <div className="homepage">
       <div className="homepage-background">

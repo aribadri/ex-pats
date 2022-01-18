@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as types from '../types/userTypes';
 
+// login user ----------
 export const loginUserLoading = () => ({
   type: types.GET_USER_DATA_LOGIN_LOADING,
 });
@@ -14,15 +15,32 @@ export const loginUserError = (payload) => ({
   type: types.GET_USER_DATA_LOGIN_ERROR,
   payload,
 });
+// login user ---------
 
-// export const logoutUser = () => ({
-//   type: LOGOUT_USER,
-// });
+// ------ auth user -------
+export const authUserError = (payload) => ({
+  type: types.GET_USER_DATA_AUTH_ERROR,
+  payload,
+});
 
-// export const authUser = (payload) => ({
-//   type: AUTH_USER,
-//   payload,
-// });
+export const authUserLoading = () => ({
+  type: types.GET_USER_DATA_AUTH_LOADING,
+});
+
+export const authUserSuccess = (payload) => ({
+  type: types.GET_USER_DATA_AUTH_SUCCESS,
+  payload,
+});
+
+// auth user thunk
+export const authUserThunk = (payload) => async (dispatch, getState) => {
+  dispatch(authUserLoading());
+  axios.get('http://localhost:5000/api/me', { withCredentials: true })
+    .then((res) => res.data)
+    .then((loggedUserData) => dispatch(authUserSuccess(loggedUserData)))
+    .catch((error) => dispatch(authUserError(error)));
+};
+// ------ auth user -------
 
 // добавляем картинку в портфолио
 export const addPortfolioImgSuccess = (payload) => ({
@@ -62,3 +80,34 @@ export const deleteImgPortfolioSuccess = (payload) => ({
   type: types.DELETE_USER_PORTFOLIO_IMG_SUCCESS,
   payload,
 });
+
+// logout user ========
+export const logoutUserLoading = () => ({
+  type: types.LOGOUT_USER_LOADING,
+});
+
+export const logoutUserError = (payload) => ({
+  type: types.LOGOUT_USER_ERROR,
+  payload,
+});
+
+export const logoutUserSuccess = () => ({
+  type: types.LOGOUT_USER_SUCCESS,
+});
+
+// logout user thunk
+export const logoutUserThunk = (payload) => async (dispatch, getState) => {
+  dispatch(logoutUserLoading());
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  axios.get('http://localhost:5000/api/logout', { headers, withCredentials: true })
+    .then((res) => res.data)
+    .then((logout) => {
+      dispatch(logoutUserSuccess());
+    })
+    .catch((error) => dispatch(logoutUserError(error)));
+};
+// logout user ========
