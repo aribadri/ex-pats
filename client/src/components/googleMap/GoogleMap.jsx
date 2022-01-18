@@ -20,9 +20,10 @@ const containerStyle = {
 };
 
 function Google({ userCoordinat }) {
+  console.log(userCoordinat);
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  const { profiList } = useContext(globalContext);
+  const { profiList1 } = useContext(globalContext);
   function zoomNumbers() {
     let number;
     for (let i = 1; i < 11; i++) {
@@ -44,18 +45,18 @@ function Google({ userCoordinat }) {
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={userCoordinat || { lat: 55.75115095562456, lng: 37.596928005819485 }}
+          center={userCoordinat ? { lat: userCoordinat.lat, lng: userCoordinat.lng } : { lat: 55, lng: 37 }}
           zoom={count}
         >
           <MarkerClusterer title="Hello">
-            {(clusterer) => profiList.map((profi) => (
+            {(clusterer) => profiList1.map((profi) => (
               <Marker
                 key={profi.id}
-                position={{ lat: profi.lat, lng: profi.lng }}
+                position={{ lat: Number(profi.lat), lng: Number(profi.lng) }}
                 label={profi.name}
                 clusterer={clusterer}
                 onClick={() => navigate(`/profi/${profi.id}`)}
-                title={profi.spesiality}
+                title={profi.name}
 
               />
             ))}
