@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router';
 import React, { useState } from 'react';
 import axios from 'axios';
 import validator from 'validator';
+import { useDispatch } from 'react-redux';
 import styles from '../regForm/regForm.module.scss';
+import { loginUserSuccess } from '../../store/actions/userAction';
 
 function LogiForm({ setModal, location }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [register, setRegister] = useState(() => ({
-  //   email: '',
-  //   password: '',
-  // }));
-
   const initialStateInputs = {
     email: '',
     password: '',
     latitude: location.lat,
     longitude: location.lng,
+    user_country: location.country,
+    user_city: location.city,
   };
   const [register, setRegister] = useState(initialStateInputs);
 
@@ -48,14 +48,17 @@ function LogiForm({ setModal, location }) {
           console.log(res);
           setRegister(initialStateInputs);
           if (res.data.message === 'Авторизация прошла успешно') {
-            navigate(`/profi/${res.data.user.id}`);
+            dispatch(loginUserSuccess(res.data.user));
+            navigate(`/users/${res.data.user.id}/profile`);
             setModal(false);
           } else if (res.data.message === 'Пользователь не найден') {
             alert('Пользователь не найден');
           } else if (res.data.message === 'Введен неверный пароль') {
             alert('Введен неверный пароль');
           } else if (res.data.message === 'Авторизация прошла успешно, локация не изменилась') {
-            navigate(`/profi/${res.data.user.id}`);
+            console.log(res.data.user, 'login form data');
+            dispatch(loginUserSuccess(res.data.user));
+            navigate(`/users/${res.data.user.id}/profile`);
             setModal(false);
           }
         }).catch(() => {

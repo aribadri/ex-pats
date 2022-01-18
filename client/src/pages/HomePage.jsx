@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-indent */
@@ -5,31 +6,35 @@
 /* eslint-disable max-len */
 // import MyButton from '../UI/button/MyButton';
 import { Gapped, Button } from '@skbkontur/react-ui';
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import axios from 'axios';
 import InputList from '../UI/combobox/InputList';
-// import Loader from '../UI/loader/Loader';
+import Loader from '../UI/loader/Loader';
 import './HimePage.css';
-// import GoogleMap from '../components/googleMap/GoogleMap';
-// import MyInput from '../UI/input/MyInput';
 import Google from '../components/googleMap/GoogleMap';
 import MyButton from '../UI/button/MyButton';
+import ProfiList from '../components/profilist/ProfiList';
+import globalContext from '../context/GlobalContext';
 
 function HomePage({
-  arr1, arr2, variations, profiSelected, setProfiSelected, regionSelected, setRegionSelected, userCity, setUserCity, setUserCoordinat, userCoordinat,
+  arr1, variations, profiSelected, setProfiSelected, userCoordinat,
 }) {
+  const [listForMap, setListForMap] = useState([]);
+  const { profiList, setProfiList } = useContext(globalContext);
+  async function getList() {
+    const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`);
+    setProfiList(data.data);
+  }
   useEffect(() => {
-    const getLocation = async () => {
-      const data = await axios.get('https://json.geoiplookup.io');
-      setUserCity(data.data.city);
-      setUserCoordinat({ lat: data.data.latitude, lng: data.data.longitude });
-    };
-    getLocation();
+    async function getListForMap() {
+      const data = await axios.get('http://localhost:5000/api/users');
+      console.log(data.data);
+      setListForMap(data.data);
+    }
+    getListForMap();
   }, []);
 
-  console.log(userCity);
-  console.log(userCoordinat);
   return (
     <div className="homepage">
       <div className="homepage-background">
@@ -37,21 +42,20 @@ function HomePage({
         {('     ')}
         <Gapped>
           <Button
+            onClick={getList}
             size="large"
             use="primary"
           >
-Find
-
+            Find
           </Button>
-
         </Gapped>
-
       </div>
       <div className="container-map">
-        <Google userCoordinat={userCoordinat} />
+        <Google userCoordinat={userCoordinat} listForMap={listForMap} />
       </div>
+      <ProfiList profiList={profiList} />
+      {/* <Loader /> */}
     </div>
-
   );
 }
 

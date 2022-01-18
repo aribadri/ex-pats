@@ -36,6 +36,12 @@ module.exports = {
           model: 'Locations',
         },
       },
+      user_country: {
+        type: Sequelize.STRING,
+      },
+      user_city: {
+        type: Sequelize.STRING,
+      },
       description: {
         type: Sequelize.TEXT,
         allowNull: true,
@@ -43,6 +49,7 @@ module.exports = {
       avatar_link: {
         type: Sequelize.STRING,
         allowNull: true,
+        defaultValue: '/uploads/avatar-default-x-pat.png',
       },
       rating: {
         type: Sequelize.INTEGER,

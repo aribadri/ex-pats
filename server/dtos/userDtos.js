@@ -22,6 +22,12 @@ module.exports = class UserDto {
 
   latitude;
 
+  user_country;
+
+  user_city;
+
+  status_service;
+
   constructor(model) {
     this.first_name = model.first_name;
     this.last_name = model.last_name;
@@ -34,5 +40,8 @@ module.exports = class UserDto {
     this.avatar_link = model.avatar_link;
     this.longitude = model.longitude;
     this.latitude = model.latitude;
+    this.user_country = model.user_country;
+    this.user_city = model.user_city;
+    this.status_service = model.status_service;
   }
 };

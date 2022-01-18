@@ -1,34 +1,46 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import { ComboBox } from '@skbkontur/react-ui';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import globalContext from './context/GlobalContext';
 import Layout from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
 import { SpecialistPage } from './pages/SpesialistPage';
 import UserPage from './pages/UserPage';
 import MyModal from './components/myModal/MyModal';
-// import Loader from './UI/loader/Loader';
 import LoginForm from './components/loginForm/LoginForm';
-// import RegForm from './components/RegForm';
 import Tabs from './UI/tabs/Tabs';
 import RegForm from './components/regForm/RegForm';
-// import InputList from './UI/combobox/InputList';
-// import InputList from './UI/combobox/InputList';
-// import MyButton from './UI/button/MyButton';
+import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 
 function App() {
+  const dispatch = useDispatch();
+
   const [regionSelected, setRegionSelected] = useState('');
   const [profiSelected, setProfiSelected] = useState('');
-  const [userCity, setUserCity] = useState('');
-  const [userCoordinat, setUserCoordinat] = useState({});
-
   const [modal, setModal] = useState(false);
   const [modalFeedBack, setModalFeedBack] = useState(false);
   const [modalWorkCard, setmodalWorkCard] = useState(false);
   const [StartChat, setStartChat] = useState(false);
+  const [profiList, setProfiList] = useState();
+  const [userCoordinat, setUserCoordinat] = useState({});
+
+  useEffect(() => {
+    const getLocation = async () => {
+      const data = await axios.get('https://json.geoiplookup.io');
+      setUserCoordinat({
+        lat: data.data.latitude, lng: data.data.longitude, city: data.data.city, country: data.data.country_name,
+      });
+    };
+    getLocation();
+    dispatch(actions.authUserThunk());
+  }, [dispatch]);
 
   const cities = [
     { value: 1, label: 'Пхукет' },
@@ -58,46 +70,57 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Layout userCity={userCity} modal={modal} setModal={setModal} />}>
-          <Route
-            index
-            element={(
-              <HomePage
-                userCoordinat={userCoordinat}
-                setUserCoordinat={setUserCoordinat}
-                userCity={userCity}
-                setUserCity={setUserCity}
-                regionSelected={regionSelected}
-                profiSelected={profiSelected}
-                setProfiSelected={setProfiSelected}
-                setRegionSelected={setRegionSelected}
-                variations={variations}
-                arr1={profi}
-                arr2={cities}
-              />
-            )}
-          />
-          <Route
-            path="/profi/:id"
-            element={(
-              <SpecialistPage
-                visible={modalFeedBack}
-                setModal={setModalFeedBack}
-                visibleWorkCard={modalWorkCard}
-                setmodalWorkCard={setmodalWorkCard}
-                visibleStartChat={StartChat}
-                setStartChat={setStartChat}
-              />
+      <globalContext.Provider value={{
+        profiList, setProfiList, profiSelected,
+      }}
+      >
+
+        <Routes>
+          <Route path="/" element={<Layout location={userCoordinat} modal={modal} setModal={setModal} />}>
+            <Route
+              index
+              element={(
+                <HomePage
+                  userCoordinat={userCoordinat}
+                  setUserCoordinat={setUserCoordinat}
+                  regionSelected={regionSelected}
+                  profiSelected={profiSelected}
+                  setProfiSelected={setProfiSelected}
+                  setRegionSelected={setRegionSelected}
+                  variations={variations}
+                  arr1={profi}
+                  arr2={cities}
+                />
+              )}
+            />
+            <Route
+              path="/users/:id"
+              element={(
+                <SpecialistPage
+                  visible={modalFeedBack}
+                  setModal={setModalFeedBack}
+                  visibleWorkCard={modalWorkCard}
+                  setmodalWorkCard={setmodalWorkCard}
+                  visibleStartChat={StartChat}
+                  setStartChat={setStartChat}
+                />
 )}
-          />
-          <Route path="/user/:id" element={<UserPage />} />
-          <Route path="/chat" element={<Chat />} />
-        </Route>
-      </Routes>
-      <MyModal visible={modal} setModal={setModal}>
-        <Tabs items={items} />
-      </MyModal>
+            />
+            <Route
+              path="/users/:id/profile"
+              element={(
+                <PrivateRoute>
+                  <UserPage />
+                </PrivateRoute>
+)}
+            />
+            <Route path="/chat" element={<Chat />} />
+          </Route>
+        </Routes>
+        <MyModal visible={modal} setModal={setModal}>
+          <Tabs items={items} />
+        </MyModal>
+      </globalContext.Provider>
 
     </div>
   );

@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
     location_id: {
       type: DataTypes.INTEGER,
     },
+    user_country: {
+      type: DataTypes.STRING,
+    },
+    user_city: {
+      type: DataTypes.STRING,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -53,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     avatar_link: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: '/uploads/avatar-default-x-pat.png',
     },
     rating: {
       type: DataTypes.INTEGER,

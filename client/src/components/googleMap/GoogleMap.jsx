@@ -1,9 +1,16 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable semi */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap, LoadScript, Marker, MarkerClusterer,
+} from '@react-google-maps/api';
+import globalContext from '../../context/GlobalContext';
 import About from '../about/About';
 
 const key1 = 'AIzaSyAQUd8z6GRUADAmOn1CcNijqY0RFaSvoXw';
@@ -12,18 +19,10 @@ const containerStyle = {
   height: '336px',
 };
 
-function Google({ userCoordinat }) {
+function Google({ userCoordinat, listForMap }) {
+  console.log(userCoordinat);
+  const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  // function zoomNumbers() {
-  //   setTimeout(() => {
-  //     if (count < 11) {
-  //       setCount((prev) => prev + 1);
-  //     } else {
-  //       setCount(10);
-  //     }
-  //   }, 500);
-  // }
-
   function zoomNumbers() {
     let number;
     for (let i = 1; i < 11; i++) {
@@ -34,6 +33,21 @@ function Google({ userCoordinat }) {
   setTimeout(() => {
     setCount(zoomNumbers());
   }, 3000);
+
+  // navigateToProfi = () => {
+
+  // }
+  function logoOnMap(link) {
+    const iconPin = {
+
+      url: `http://localhost:5000/${link}`,
+      size: new window.google.maps.Size(50, 50),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(0, 32),
+      scaledSize: new window.google.maps.Size(40, 40),
+    };
+    return iconPin
+  }
   return (
     <div>
       <LoadScript
@@ -41,19 +55,26 @@ function Google({ userCoordinat }) {
       >
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={userCoordinat || { lat: '55.75115095562456', lng: '37.596928005819485' }}
+          center={userCoordinat ? { lat: userCoordinat.lat, lng: userCoordinat.lng } : { lat: 55, lng: 37 }}
           zoom={count}
         >
-          <Marker
-            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            position={userCoordinat}
-            label="Собутыльник"
-          />
-          <Marker
-            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            position={userCoordinat}
-            label="Педик"
-          />
+          <MarkerClusterer>
+            {(clusterer) => listForMap.map((profi) => (
+              <Marker
+                key={profi.id}
+                position={{ lat: Number(profi.latitude), lng: Number(profi.longitude) }}
+                label={profi.first_name}
+                clusterer={clusterer}
+                onClick={() => navigate(`/users/${profi.id}`)}
+                title={profi.first_name}
+                animation={window.google.maps.Animation.DROP}
+                icon={logoOnMap(profi.avatar_link)}
+                style={{ borderRadius: '50%' }}
+                optimized="false"
+              />
+            ))}
+          </MarkerClusterer>
+
         </GoogleMap>
       </LoadScript>
     </div>
