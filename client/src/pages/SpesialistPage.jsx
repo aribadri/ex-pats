@@ -2,10 +2,12 @@ import '../components/scrolllabel/Scrolllabel.css';
 import './SpesialistPage.css';
 // import 'swiper/css/swiper.css';
 // import Swiper from 'swiper';
-// import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
+
 // import ReactIdSwiper from 'react-id-swiper';
 // import Scrollable from '../components/scrolllabel/Scrolllabel';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import About from '../components/about/About';
 // import Dialog from '../components/dialog/Dialog';
 import Contacts from '../components/contacts/Contacts';
@@ -25,20 +27,30 @@ import FeedBackCreate from '../components/feedBackCreate/FeedBackCreate';
 
 // eslint-disable-next-line
 export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard }) => {
+  const { id } = useParams();
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    async function getUser() {
+      const data = await axios.get(`http://localhost:5000/api/users/${id}`);
+      console.log(data.data);
+      setUser(data.data);
+    }
+    getUser();
+  }, []);
   return (
     <div className="wrap-profi">
       <div className="container-profi">
         <div className="profi-info">
-          <div className="profi-picture"><PictureProfi /></div>
+          <div className="profi-picture"><PictureProfi user={user} /></div>
           <div className="profi-data">
             <div className="fio">
-              <div className="first-name-profi"><FirstNameProfi /></div>
-              <div className="last-name-profi"><LastNameProfi /></div>
+              <div className="first-name-profi"><FirstNameProfi user={user} /></div>
+              <div className="last-name-profi"><LastNameProfi user={user} /></div>
             </div>
-            <div className="country-profi"><CountryProfi /></div>
-            <div className="rating"><RatingProfi /></div>
+            <div className="country-profi"><CountryProfi user={user} /></div>
+            <div className="rating"><RatingProfi user={user} /></div>
             <div className="specialization-header">Специализация</div>
-            <div className="specialization"><Specialization /></div>
+            <div className="specialization"><Specialization user={user} /></div>
           </div>
         </div>
         {/* style={{ border: '1px solid black', width: '100px' }} */}
@@ -47,7 +59,7 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
         }}
         />
         <div className="about">
-          <About />
+          <About user={user} />
         </div>
 
         <div className="portfolio">
