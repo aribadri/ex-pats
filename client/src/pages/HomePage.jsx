@@ -44,7 +44,7 @@ function HomePage({
         <Google userCoordinat={userCoordinat} />
       </div>
       <ProfiList profiList={profiList} />
-      <Loader />
+      {/* <Loader /> */}
     </div>
   );
 }
