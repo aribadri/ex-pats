@@ -20,13 +20,14 @@ import CountryProfi from '../components/countryProfi/CountryProfi';
 import MyButton from '../UI/button/MyButton';
 import MyModal from '../components/myModal/MyModal';
 import FeedBackCreate from '../components/feedBackCreate/FeedBackCreate';
+import StartChating from '../components/startChating/StartChating';
 // import CardWork from '../components/cardWork/CardWork';
 // import Slider from '../UI/slider/Slider';
 
 // eslint-disable-next-line
 
 // eslint-disable-next-line
-export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard }) => {
+export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard, visibleStartChat, setStartChat }) => {
   const { id } = useParams();
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -84,9 +85,12 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
         <MyModal visible={visible} setModal={setModal}>
           <FeedBackCreate />
         </MyModal>
+        <MyModal visible={visibleStartChat} setModal={setStartChat} className="modal-open" style={{ width: '100px' }}>
+          <StartChating />
+        </MyModal>
         <div className="button-message">
 
-          <Link to="/profi/:id/chat"><MyButton className="button-chat">Написать сообщение</MyButton></Link>
+          <MyButton className="button-chat" onClick={() => setStartChat(true)}>Написать сообщение</MyButton>
           <MyButton className="button-feedback" onClick={() => setModal(true)}>Написать отзыв</MyButton>
         </div>
         {/* <div className="feedback"> */}

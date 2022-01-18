@@ -3,7 +3,7 @@ import classes from './MyModal.module.css';
 
 function MyModal({ visible, setModal, children }) {
   const rootClasses = [classes.myModal];
-
+  console.log(1);
   if (visible) {
     rootClasses.push(classes.active);
   }
