@@ -17,6 +17,7 @@
 }
 
 .myButtonLogin {
+  cursor: pointer;
   width: 100px;
   height: 50px;
   background: #2F2A3E;
@@ -49,4 +50,15 @@
   letter-spacing: 0.03em;
   color: #2F2A3E;
   border-bottom: 2px dashed #000000;
+}
+
+.linksUserAuth {
+  text-decoration: none;
+  margin-right: 30px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.03em;
+  color: #2F2A3E;
 }
