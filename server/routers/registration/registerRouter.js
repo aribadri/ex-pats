@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
       password, latitude, longitude,
       user_city, user_country,
     } = req.body;
-    console.log(req.body, 'req body register');
+    // console.log(req.body, 'req body register');
     const candidateFirstName = await User.findOne({ where: { first_name } });
     const candidateLastName = await User.findOne({ where: { last_name } });
     const candidateEmail = await User.findOne({ where: { email } });

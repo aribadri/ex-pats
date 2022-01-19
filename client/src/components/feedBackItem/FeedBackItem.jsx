@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -33,7 +34,7 @@ function FeedBackItem({ el, id }) {
             <div>
               Оценка:
               {' '}
-              {stars.map((star) => <FaStar size="1em" color="orange" />)}
+              {stars.map((star, i) => <FaStar size="1em" key={i + 1} color="orange" />)}
             </div>
             <div>
               Отзыв от пользователя:

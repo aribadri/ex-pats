@@ -10,9 +10,10 @@
   display: flex;
   justify-content: center;
   background: whitesmoke;
-  height: 650px;
-  width: 1000px;
+  /* height: 55%;
+  width: 40%; */
   border-radius: 62px;
+  padding: 20px;
 }
 
 .myModal.active {

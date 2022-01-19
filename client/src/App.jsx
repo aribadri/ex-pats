@@ -27,6 +27,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [modalFeedBack, setModalFeedBack] = useState(false);
   const [modalWorkCard, setmodalWorkCard] = useState(false);
+  const [StartChat, setStartChat] = useState(false);
   const [profiList, setProfiList] = useState();
   const [userCoordinat, setUserCoordinat] = useState({});
 
@@ -92,7 +93,19 @@ function App() {
                 />
               )}
             />
-            <Route path="/users/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
+            <Route
+              path="/users/:id"
+              element={(
+                <SpecialistPage
+                  visible={modalFeedBack}
+                  setModal={setModalFeedBack}
+                  visibleWorkCard={modalWorkCard}
+                  setmodalWorkCard={setmodalWorkCard}
+                  visibleStartChat={StartChat}
+                  setStartChat={setStartChat}
+                />
+)}
+            />
             <Route
               path="/users/:id/profile"
               element={(

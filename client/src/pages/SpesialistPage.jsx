@@ -24,13 +24,14 @@ import MyModal from '../components/myModal/MyModal';
 import FeedBackCreate from '../components/feedBackCreate/FeedBackCreate';
 import FeedBackList from '../components/feedBackList/FeedBackList';
 import Loader from '../UI/loader/Loader';
+import StartChating from '../components/startChating/StartChating';
 // import CardWork from '../components/cardWork/CardWork';
 // import Slider from '../UI/slider/Slider';
 
 // eslint-disable-next-line
 
 // eslint-disable-next-line
-export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard }) => {
+export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard, visibleStartChat, setStartChat }) => {
   const { id } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -75,6 +76,9 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             <MyModal visible={visibleWorkCard} setModal={setmodalWorkCard} />
             <MyModal visible={visible} setModal={setModal}>
               <FeedBackCreate id={id} setModal={setModal} />
+            </MyModal>
+            <MyModal visible={visibleStartChat} setModal={setStartChat} className="modal-open" style={{ width: '100px' }}>
+              <StartChating />
             </MyModal>
             <div className="button-message">
 
