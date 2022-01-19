@@ -1,0 +1,26 @@
+.divContainerAvatarBio {
+  display: flex;
+}
+
+.divBioContainer {
+  margin-left: 40px;
+}
+
+.tagPnameUser {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.03em;
+  color: #2F2A3E;
+}
+
+.labelCheckBoxStatus {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.inputCheckBoxStatus {
+  margin-left: 10px;
+}
