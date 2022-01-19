@@ -7,9 +7,9 @@ function InputList({
   arr, variations, selected, setSelected,
 }) {
   const delay = (time) => (args) => new Promise((resolve) => setTimeout(resolve, time, args));
-
-  const getItems = (query) => Promise.resolve(arr
-    .filter((x) => x.label.toLowerCase().includes(query.toLowerCase()) || x.value.toString(10) === query)
+  console.log(arr);
+  const getItems = (query) => Promise.resolve(arr[0]
+    .filter((x) => x.label.toLowerCase().includes(query.toLowerCase()) || x.id.toString() === query)
     .map(({ label, ...rest }) => {
       const start = label.toLowerCase().indexOf(query.toLowerCase());
       const end = start + query.length;

@@ -7,16 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name_specialty: {
-        type: Sequelize.STRING,
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-        },
-      },
-      specialty_logo_link: {
+      label: {
         type: Sequelize.STRING,
       },
     });
