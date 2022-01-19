@@ -18,9 +18,11 @@ import ProfiList from '../components/profilist/ProfiList';
 import globalContext from '../context/GlobalContext';
 
 function HomePage({
-  arr1, variations, profiSelected, setProfiSelected, userCoordinat,
+  variations, profiSelected, setProfiSelected, userCoordinat,
 }) {
   const [listForMap, setListForMap] = useState([]);
+  const [listForInput, setListForInput] = useState([]);
+
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
     const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`);
@@ -29,16 +31,19 @@ function HomePage({
   useEffect(() => {
     async function getListForMap() {
       const data = await axios.get('http://localhost:5000/api/users');
-      console.log(data.data);
-      setListForMap(data.data);
+      console.log(data);
+      setListForMap(data.data.profiArr);
+      setListForInput(data.data.specialtiesiArr);
     }
     getListForMap();
   }, []);
+  const arrNew = [...[listForInput]];
+  console.log(arrNew);
 
   return (
     <div className="homepage">
       <div className="homepage-background">
-        <InputList arr={arr1} variations={variations[1]} selected={profiSelected} setSelected={setProfiSelected} />
+        <InputList arr={arrNew} variations={variations[1]} selected={profiSelected} setSelected={setProfiSelected} />
         {('     ')}
         <Gapped>
           <Button

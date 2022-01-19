@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // import './App.css';
 import { FaStar } from 'react-icons/fa';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 const colors = {
   orange: '#FFBA5A',
@@ -42,10 +44,13 @@ const styles = {
 
 };
 // eslint-disable-next-line react/function-component-definition
-const FeedBackCreate = () => {
+const FeedBackCreate = ({ id, setModal }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [inputValue, setInputValue] = useState('');
   const stars = Array(5).fill(0);
+
+  const userId = useSelector((state) => state.user.userData.id);
 
   const handleClick = (value) => {
     setCurrentValue(value);
@@ -58,10 +63,27 @@ const FeedBackCreate = () => {
   const handleMouseLeave = () => {
     // setHoverValue(undefined);
   };
+  async function sendFeedback() {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    axios.post(`http://localhost:5000/api/users/${id}/feedback`, {
+      starCount: currentValue,
+      feedback_to: id,
+      feedback_from: userId,
+      text: inputValue,
+    }, { headers, withCredentials: true })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+    setModal(false);
+  }
 
   return (
     <div style={styles.container}>
-      <h3> Оставить отзыв: </h3>
+      <h2> Оцените услугу </h2>
       <div style={styles.stars}>
         {stars.map((_, index) => (
           <FaStar
@@ -80,14 +102,16 @@ const FeedBackCreate = () => {
         ))}
       </div>
       <textarea
-        placeholder="Напишите отзыв..."
+        placeholder="Введите текст..."
         style={styles.textarea}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
 
       <button
         type="button"
         style={styles.button}
-        onClick={() => console.log(currentValue)}
+        onClick={sendFeedback}
       >
         Отправить
       </button>

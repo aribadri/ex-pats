@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Countryprofi() {
+function Countryprofi({ user }) {
   return (
     <div>
-      Тайланд
+      {`${user.user_country}, ${user.user_city}`}
     </div>
   );
 }

@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     text_content: {
       type: DataTypes.TEXT,
     },
+    stars_count: {
+      type: DataTypes.INTEGER,
+    },
   }, {
     sequelize,
     modelName: 'Reviews',

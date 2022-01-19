@@ -7,13 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      count_click: {
+      specialty_id: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      rating_value: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+        references: {
+          model: 'Specialties',
+        },
       },
       user_id: {
         type: Sequelize.INTEGER,
