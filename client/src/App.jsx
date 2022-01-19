@@ -3,9 +3,7 @@
 /* eslint-disable max-len */
 import './App.css';
 import { useState, useEffect } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
-// import { ComboBox } from '@skbkontur/react-ui';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import globalContext from './context/GlobalContext';
@@ -14,16 +12,12 @@ import { HomePage } from './pages/HomePage';
 import { SpecialistPage } from './pages/SpesialistPage';
 import UserPage from './pages/UserPage';
 import MyModal from './components/myModal/MyModal';
-// import Loader from './UI/loader/Loader';
 import LoginForm from './components/loginForm/LoginForm';
-// import RegForm from './components/RegForm';
 import Tabs from './UI/tabs/Tabs';
 import RegForm from './components/regForm/RegForm';
-// import InputList from './UI/combobox/InputList';
-// import InputList from './UI/combobox/InputList';
-// import MyButton from './UI/button/MyButton';
 import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +29,6 @@ function App() {
   const [modalWorkCard, setmodalWorkCard] = useState(false);
   const [profiList, setProfiList] = useState();
   const [userCoordinat, setUserCoordinat] = useState({});
-  console.log(userCoordinat, 'userCoordinat app ');
 
   useEffect(() => {
     const getLocation = async () => {
@@ -46,10 +39,7 @@ function App() {
       });
     };
     getLocation();
-
-    axios.get('http://localhost:5000/api/me', { withCredentials: true })
-      .then((res) => res.data)
-      .then((loggedUserData) => dispatch(actions.loginUserSuccess(loggedUserData)));
+    dispatch(actions.authUserThunk());
   }, [dispatch]);
 
   const cities = [
@@ -145,7 +135,14 @@ function App() {
               )}
             />
             <Route path="/users/:id" element={<SpecialistPage visible={modalFeedBack} setModal={setModalFeedBack} visibleWorkCard={modalWorkCard} setmodalWorkCard={setmodalWorkCard} />} />
-            <Route path="/users/:id/profile" element={<UserPage />} />
+            <Route
+              path="/users/:id/profile"
+              element={(
+                <PrivateRoute>
+                  <UserPage />
+                </PrivateRoute>
+)}
+            />
             <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>
