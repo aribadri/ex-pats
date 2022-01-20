@@ -12,6 +12,9 @@ import ContactItem from '../components/userBio/ContactItem';
 
 function UserPage() {
   const userData = useSelector((state) => state.user.userData);
+  const statusLoading = useSelector((state) => state.user.loading);
+  const statusError = useSelector((state) => state.user.error);
+  console.log(statusError, 'statusError');
   const userContacts = useSelector((state) => state.user.userContacts);
   // userId используется для того, чтобы обновить ссылку в БД у конкретного юзера
   const userId = userData.id;
@@ -62,7 +65,12 @@ function UserPage() {
       {userStatusService
       && (
       <>
-        <AboutMe userId={userId} userDescription={userData.description} />
+        <AboutMe
+          userId={userId}
+          userDescription={userData.description}
+          loading={statusLoading}
+          error={statusError}
+        />
         <Portfolio
           images={userPortfolioData}
           userId={userId}

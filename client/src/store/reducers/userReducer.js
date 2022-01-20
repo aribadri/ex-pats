@@ -8,6 +8,7 @@ export default function userReducer(state = {}, action) {
     case types.GET_USER_DATA_AUTH_LOADING:
     case types.STATUS_SERVICE_CHANGE_LOADING:
     case types.ADD_DESCRIPTION_LOADING:
+    case types.REG_USER_LOADING:
     case types.ADD_CONTACT_LOADING:
     case types.LOGOUT_USER_LOADING: {
       const newState = { ...state };
@@ -15,7 +16,23 @@ export default function userReducer(state = {}, action) {
       return newState;
     }
 
-    case types.GET_USER_DATA_LOGIN_SUCCESS:
+    case types.REG_USER_SUCCESS: {
+      const newState = { ...state };
+      newState.loading = false;
+      newState.userData = { ...payload };
+      newState.userContacts = [...newState.userContacts];
+      return newState;
+    }
+
+    case types.GET_USER_DATA_LOGIN_SUCCESS: {
+      const newState = { ...state };
+      newState.loading = false;
+      newState.userData = { ...payload.user };
+      newState.userContacts = [...payload.userContactData];
+      return newState;
+    }
+
+    //  авторизация
     case types.GET_USER_DATA_AUTH_SUCCESS: {
       const newState = { ...state };
       newState.loading = false;
@@ -24,13 +41,14 @@ export default function userReducer(state = {}, action) {
       return newState;
     }
 
-    // обработка ошибка при получении авторизации и удалении картинки
+    // обработка ошибки
     case types.GET_USER_DATA_LOGIN_ERROR:
     case types.DELETE_USER_PORTFOLIO_IMG_ERROR:
     case types.GET_USER_DATA_AUTH_ERROR:
     case types.STATUS_SERVICE_CHANGE_ERROR:
     case types.ADD_DESCRIPTION_ERROR:
     case types.ADD_CONTACT_ERROR:
+    case types.REG_USER_ERROR:
     case types.LOGOUT_USER_ERROR: {
       const newState = { ...state };
       newState.loading = false;

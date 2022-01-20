@@ -4,12 +4,10 @@ import validator from 'validator';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import styles from './regForm.module.scss';
-import { loginUserSuccess } from '../../store/actions/userAction';
+import * as actions from '../../store/actions/userAction';
 
 function RegForm({ setModal, location }) {
   const dispatch = useDispatch();
-
-  console.log(location, 'sdfsdf');
   const navigate = useNavigate();
   const initialStateInputs = {
     first_name: '',
@@ -46,16 +44,17 @@ function RegForm({ setModal, location }) {
     )) {
       alert('Password must consist of one lowercase, uppercase letter and number, at least 3 characters');
     } else {
+      dispatch(actions.regUserLoading());
       const headers = {
         'Content-Type': 'application/json',
       };
       axios.post(`${DOMEN_SITE}/api/users/registration`, register, { headers, withCredentials: true })
         .then((res) => {
-          setRegister(initialStateInputs);
           if (res.data.message === 'Регистрация прошла успешно') {
-            dispatch(loginUserSuccess(res.data.user));
-            navigate(`/users/${res.data.user.id}/profile`);
+            dispatch(actions.regUserSuccess(res.data.user));
+            setRegister(initialStateInputs);
             setModal(false);
+            navigate(`/users/${res.data.user.id}/profile`);
           } else if (res.data.message === 'Пользователь с таким именем уже существует') {
             alert('Пользователь с таким именем уже существует');
           } else if (res.data.message === 'Пользователь с такой фамилией уже существует') {
@@ -63,7 +62,8 @@ function RegForm({ setModal, location }) {
           } else if (res.data.message === 'Пользователь с такой почтой уже существует') {
             alert('Пользователь с такой почтой уже существует');
           }
-        }).catch(() => {
+        }).catch((error) => {
+          dispatch(actions.regUserError(error));
           alert('На сервере произошла ошибка, попробуйте позже');
         });
     }

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User } = require('../../db/models');
+const { User, Contact } = require('../../db/models');
 const UserDto = require('../../dtos/userDtos');
 
 router.post('/', async (req, res) => {
@@ -13,6 +13,10 @@ router.post('/', async (req, res) => {
       return res.json({ message: 'Пользователь не найден' });
     }
 
+    const userContactData = await Contact.findAll(
+      { where: { user_id: user.id }, raw: true },
+    );
+    console.log(userContactData, 'userContactData ++===');
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
@@ -41,13 +45,13 @@ router.post('/', async (req, res) => {
         console.log(userDto, 'userDto data');
         // создаем сессию
         req.session.user = { id: userDto.id, email: userDto.email };
-        return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto });
+        return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto, userContactData });
       }
 
       // изменили локацию и отправили на клиент новые данные
       const userDto = new UserDto(updateLocation[1][0]);
       req.session.user = { id: userDto.id, email: userDto.email };
-      return res.json({ message: 'Авторизация прошла успешно', user: userDto });
+      return res.json({ message: 'Авторизация прошла успешно', user: userDto, userContactData });
     }
 
     const userDto = new UserDto(user);
@@ -55,7 +59,7 @@ router.post('/', async (req, res) => {
     // создаем сессию
     req.session.user = { id: userDto.id, email: userDto.email };
 
-    return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto });
+    return res.json({ message: 'Авторизация прошла успешно, локация не изменилась', user: userDto, userContactData });
   } catch (error) {
     return res.json(error);
   }

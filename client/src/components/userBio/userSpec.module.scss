@@ -38,7 +38,7 @@
   text-align: center;
   border-radius: 25px;
   background: none;
-  margin-left: 50px;
+  margin-left: 30px;
 }
 
 .divMyContactsContainer {
@@ -61,3 +61,33 @@
   line-height: 20px;
   color: #3E3D3D;
 }
+
+.divDeleteImg {
+  // top: 0px;
+  // left: 320px;
+  background-color: #70688b;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  }
+  .divDeleteImg:hover {
+  opacity: 1;
+  }
+  .divDeleteImg:before, .divDeleteImg:after {
+  position: absolute;
+  bottom: 3px;
+  left: 9px;
+  content: ' ';
+  height: 15px;
+  width: 3px;
+  background-color: #E57377;
+  }
+  .divDeleteImg:before {
+  transform: rotate(45deg);
+  }
+  .divDeleteImg:after {
+  transform: rotate(-45deg);
+  }
