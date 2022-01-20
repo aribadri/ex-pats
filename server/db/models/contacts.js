@@ -9,16 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Contact.init({
-    instagram: {
-      type: DataTypes.STRING,
-    },
-    telegram: {
-      type: DataTypes.STRING,
-    },
-    phone_number: {
-      type: DataTypes.INTEGER,
-    },
-    whats_up: {
+    user_contact: {
       type: DataTypes.STRING,
     },
     user_id: {

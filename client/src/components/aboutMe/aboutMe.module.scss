@@ -1,0 +1,27 @@
+.divAboutMeContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.aboutMeTitle {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 27px;
+  color: #2F2A3E;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+
+.inputDescription {
+  resize: vertical;
+  width: 1139px;
+  max-width: 1139px;
+  min-height: 100px;
+  max-height: 400px;
+  border: 2px solid #2F2A3E;
+  box-sizing: border-box;
+  border-radius: 25px;
+  padding: 15px;
+}
+

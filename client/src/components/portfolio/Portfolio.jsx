@@ -15,7 +15,7 @@ export default function Portfolio({
 
   async function deleteImgHandler(e) {
     const deleteImg = await axios.delete(`http://localhost:5000/api/portfolio/${e.target.id}`);
-    console.log(deleteImg, 'ответ бэка на удаленный имг');
+    // console.log(deleteImg, 'ответ бэка на удаленный имг');
     dispatch(actions.deleteImgPortfolioSuccess(Number(e.target.id)));
   }
 
