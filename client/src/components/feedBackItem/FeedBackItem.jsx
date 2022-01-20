@@ -3,10 +3,11 @@ import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaStar } from 'react-icons/fa';
+
 // import globalContext from '../../context/GlobalContext';
 
 function FeedBackItem({ el, id }) {
-  const [userFeedback, setUserFeedback] = useState(null);
+  const [userFeedback, setUserFeedback] = useState([]);
   // const { profiList } = useContext(globalContext);
   const navigate = useNavigate();
 
@@ -20,7 +21,15 @@ function FeedBackItem({ el, id }) {
   }, []);
 
   const stars = Array(el.stars_count).fill(0);
-
+  const params = {
+    direction: '.swiper-pagination',
+    slidesPerView: 'auto',
+    freeMode: true,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+    mousewheel: true,
+  };
   return (
     <div>
       {userFeedback

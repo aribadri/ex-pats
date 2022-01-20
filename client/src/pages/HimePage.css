@@ -3,13 +3,17 @@
   position: relative;
   width: 1139px;
   height: 336px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
  
 
   
-  background-image: url(https://www.oum.ru/upload/iblock/cf3/cf3f1649eb6df62f997aa769c44b1c45.jpg);
+  /* background-image: url(https://www.oum.ru/upload/iblock/cf3/cf3f1649eb6df62f997aa769c44b1c45.jpg);
+  */
+  background-image: url(../assets/img/xpatbg.png);
+  
   /* mix-blend-mode: normal; */
   -webkit-background-size: 100%;
   
@@ -25,6 +29,7 @@
 }
 
 .container-map {
+  position: relative;
   display: flex;
   width: 400px;
   margin-top: 40px;
@@ -32,4 +37,5 @@
   /* top: 195px; */
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }

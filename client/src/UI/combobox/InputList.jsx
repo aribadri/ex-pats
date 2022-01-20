@@ -62,7 +62,7 @@ function InputList({
         style={{ hight: '300px' }}
         width="700px"
         height="300px"
-        size="large"
+        size="small"
         error={error}
         getItems={getItems}
         onValueChange={handleValueChange}

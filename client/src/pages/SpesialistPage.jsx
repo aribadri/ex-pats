@@ -3,13 +3,14 @@
 import '../components/scrolllabel/Scrolllabel.css';
 import './SpesialistPage.css';
 // import 'swiper/css/swiper.css';
-import Swiper from 'swiper';
+// import Swiper from 'swiper';
 import { useState, useEffect } from 'react';
 
 // import ReactIdSwiper from 'react-id-swiper';
 // import Scrollable from '../components/scrolllabel/Scrolllabel';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import About from '../components/about/About';
 // import Dialog from '../components/dialog/Dialog';
 import Contacts from '../components/contacts/Contacts';
@@ -25,6 +26,8 @@ import FeedBackCreate from '../components/feedBackCreate/FeedBackCreate';
 import FeedBackList from '../components/feedBackList/FeedBackList';
 import Loader from '../UI/loader/Loader';
 import StartChating from '../components/startChating/StartChating';
+import NewLoader from '../UI/newLoader/NewLoader';
+
 // import CardWork from '../components/cardWork/CardWork';
 // import Slider from '../UI/slider/Slider';
 
@@ -43,9 +46,19 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
     getUser();
   }, [id]);
   const { Reviews } = user;
+  const userId = useSelector((state) => state.user.userData.id);
+  const params = {
+    direction: 'vertical',
+    slidesPerView: 'auto',
+    freeMode: true,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+    mousewheel: true,
+  };
   return (
     <div className="wrap-profi">
-      {!Reviews ? <Loader />
+      {!Reviews ? <NewLoader style={{ fontSize: '64px' }} />
         : (
           <div className="container-profi">
             <div className="profi-info">
@@ -80,11 +93,13 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             <MyModal visible={visibleStartChat} setModal={setStartChat} className="modal-open" style={{ width: '100px' }}>
               <StartChating />
             </MyModal>
-            <div className="button-message">
-
-              <Link to="/profi/:id/chat"><MyButton className="button-chat">Написать сообщение</MyButton></Link>
-              <MyButton className="button-feedback" onClick={() => setModal(true)}>Написать отзыв</MyButton>
-            </div>
+            {userId
+              && (
+                <div className="button-message">
+                  <Link to="/profi/:id/chat"><MyButton className="button-chat">Написать сообщение</MyButton></Link>
+                  <MyButton className="button-feedback" onClick={() => setModal(true)}>Написать отзыв</MyButton>
+                </div>
+              )}
 
           </div>
         )}

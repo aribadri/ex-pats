@@ -17,6 +17,7 @@ const key1 = 'AIzaSyAQUd8z6GRUADAmOn1CcNijqY0RFaSvoXw';
 const containerStyle = {
   width: '1139px',
   height: '336px',
+  borderRadius: '10px',
 };
 
 function Google({ userCoordinat, listForMap }) {
@@ -41,9 +42,9 @@ function Google({ userCoordinat, listForMap }) {
     const iconPin = {
 
       url: `http://localhost:5000/${link}`,
-      size: new window.google.maps.Size(100, 100),
+      size: new window.google.maps.Size(70, 110),
       origin: new window.google.maps.Point(0, 15),
-      scaledSize: new window.google.maps.Size(60, 60),
+      scaledSize: new window.google.maps.Size(50, 50),
       border: new window.google.maps.Size(100, 100),
     };
     return iconPin
