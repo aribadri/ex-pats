@@ -15,7 +15,23 @@ export const loginUserError = (payload) => ({
   type: types.GET_USER_DATA_LOGIN_ERROR,
   payload,
 });
-// login user ---------
+// login user ----------
+
+// reg user ====
+export const regUserSuccess = (payload) => ({
+  type: types.REG_USER_SUCCESS,
+  payload,
+});
+
+export const regUserError = (payload) => ({
+  type: types.REG_USER_ERROR,
+  payload,
+});
+
+export const regUserLoading = () => ({
+  type: types.REG_USER_LOADING,
+});
+// reg user ====
 
 // ------ auth user -------
 export const authUserError = (payload) => ({
@@ -111,3 +127,71 @@ export const logoutUserThunk = (payload) => async (dispatch, getState) => {
     .catch((error) => dispatch(logoutUserError(error)));
 };
 // logout user ========
+
+// status service change ---------
+export const statusServiceLoading = () => ({
+  type: types.STATUS_SERVICE_CHANGE_LOADING,
+});
+
+export const statusServiceError = (payload) => ({
+  type: types.STATUS_SERVICE_CHANGE_ERROR,
+  payload,
+});
+
+export const statusServiceSuccess = (payload) => ({
+  type: types.STATUS_SERVICE_CHANGE_SUCCESS,
+  payload,
+});
+
+// status service thunk
+export const statusServiceThunk = (payload) => async (dispatch, getState) => {
+  dispatch(statusServiceLoading());
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  axios.put(
+    `http://localhost:5000/api/users/status/service/${payload.id}`,
+    { status_service: payload.status_service },
+    { headers, withCredentials: true },
+  )
+    .then((res) => res.data)
+    .then((statusService) => {
+      dispatch(statusServiceSuccess(statusService));
+    })
+    .catch((error) => dispatch(statusServiceError(error)));
+};
+// status service change ---------
+
+// add my contacts ++++++
+export const addContactLoading = () => ({
+  type: types.ADD_CONTACT_LOADING,
+});
+
+export const addContactError = (payload) => ({
+  type: types.ADD_CONTACT_ERROR,
+  payload,
+});
+
+export const addContactSuccess = (payload) => ({
+  type: types.ADD_CONTACT_SUCCESS,
+  payload,
+});
+
+// add my contact thunk
+export const addContactThunk = (payload) => async (dispatch, getState) => {
+  dispatch(addContactLoading());
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  axios.post(
+    `http://localhost:5000/api/users/new/contacts/${payload.id}`,
+    { contact: payload.contact },
+    { headers, withCredentials: true },
+  )
+    .then((res) => res.data)
+    .then((newContact) => {
+      dispatch(addContactSuccess(newContact));
+    })
+    .catch((error) => dispatch(addContactError(error)));
+};
+// add my contacts ++++++

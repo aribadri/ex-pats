@@ -16,6 +16,9 @@ const uploadPortfolioRouter = require('./routers/uploadsRouter/uploadPortfolioRo
 const getAllPortfolioRouter = require('./routers/uploadsRouter/getAllPortfolioRouter');
 const usersRouter = require('./routers/users/usersRouter');
 const logoutRouter = require('./routers/logoutRouter');
+const statusServiceRouter = require('./routers/statusService/statusServiceRouter');
+const addDescriptionRouter = require('./routers/addDescription/addDescription');
+const addNewContactRouter = require('./routers/addNewContact/addNewContactRouter');
 
 const app = express();
 
@@ -62,5 +65,8 @@ app.use('/api/me', authRouter);
 app.use('/api/logout', logoutRouter);
 
 app.use('/api/users', usersRouter);
+app.use('/api/users/status/service/:id', statusServiceRouter);
+app.use('/api/users/new/descriptions/:id', addDescriptionRouter);
+app.use('/api/users/new/contacts/:id', addNewContactRouter);
 
 module.exports = app;

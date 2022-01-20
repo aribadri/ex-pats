@@ -1,0 +1,93 @@
+.divUserSpecContainer {
+  margin-top: 40px;
+}
+
+.titleSpec {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 27px;
+  letter-spacing: 0.03em;
+  color: #2F2A3E;
+}
+
+.inputContacts {
+  margin-top: 20px;
+  border: 2px solid #2F2A3E;
+  border-radius: 25px;
+  width: 450px;
+  padding-left: 10px;
+  height: 50px;
+  outline: none;
+}
+
+.btnAddContact {
+  width: 100px;
+  cursor: pointer;
+  width: 127px;
+  height: 50px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.03em;
+  color: #2F2A3E;
+  padding: 3px;
+  border: 2px solid #2F2A3E;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 25px;
+  background: none;
+  margin-left: 30px;
+}
+
+.divMyContactsContainer {
+  margin-bottom: 30px;
+}
+
+.divContactItemContainer {
+  display: flex;
+  margin-bottom: 70px;
+  max-width: 1139px;
+  flex-wrap: wrap;
+}
+
+.divContactItem {
+  margin-right: 40px;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 20px;
+  color: #3E3D3D;
+}
+
+.divDeleteImg {
+  // top: 0px;
+  // left: 320px;
+  background-color: #70688b;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  }
+  .divDeleteImg:hover {
+  opacity: 1;
+  }
+  .divDeleteImg:before, .divDeleteImg:after {
+  position: absolute;
+  bottom: 3px;
+  left: 9px;
+  content: ' ';
+  height: 15px;
+  width: 3px;
+  background-color: #E57377;
+  }
+  .divDeleteImg:before {
+  transform: rotate(45deg);
+  }
+  .divDeleteImg:after {
+  transform: rotate(-45deg);
+  }

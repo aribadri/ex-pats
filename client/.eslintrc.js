@@ -31,5 +31,7 @@ module.exports = {
     'no-unused-expressions': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-underscore-dangle': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/label-has-for': 'off',
   },
 };

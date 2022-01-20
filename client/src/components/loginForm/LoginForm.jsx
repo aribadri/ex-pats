@@ -6,7 +6,7 @@ import axios from 'axios';
 import validator from 'validator';
 import { useDispatch } from 'react-redux';
 import styles from '../regForm/regForm.module.scss';
-import { loginUserSuccess } from '../../store/actions/userAction';
+import { loginUserSuccess, loginUserLoading, loginUserError } from '../../store/actions/userAction';
 
 function LogiForm({ setModal, location }) {
   const dispatch = useDispatch();
@@ -40,15 +40,17 @@ function LogiForm({ setModal, location }) {
     })) {
       alert('Password must consist of one lowercase, uppercase letter and number, at least 3 characters');
     } else {
+      dispatch(loginUserLoading());
       const headers = {
         'Content-Type': 'application/json',
       };
       axios.post(`${DOMEN_SITE}/api/users/login`, register, { headers, withCredentials: true })
         .then((res) => {
-          console.log(res);
+          console.log(res, 'res login -');
           setRegister(initialStateInputs);
           if (res.data.message === 'Авторизация прошла успешно') {
-            dispatch(loginUserSuccess(res.data.user));
+            console.log(res.data.user, 'res.data.user login');
+            dispatch(loginUserSuccess(res.data));
             navigate(`/users/${res.data.user.id}/profile`);
             setModal(false);
           } else if (res.data.message === 'Пользователь не найден') {
@@ -57,11 +59,12 @@ function LogiForm({ setModal, location }) {
             alert('Введен неверный пароль');
           } else if (res.data.message === 'Авторизация прошла успешно, локация не изменилась') {
             console.log(res.data.user, 'login form data');
-            dispatch(loginUserSuccess(res.data.user));
+            dispatch(loginUserSuccess(res.data));
             navigate(`/users/${res.data.user.id}/profile`);
             setModal(false);
           }
-        }).catch(() => {
+        }).catch((error) => {
+          dispatch(loginUserError(error));
           alert('На сервере произошла ошибка, попробуйте позже');
         });
     }

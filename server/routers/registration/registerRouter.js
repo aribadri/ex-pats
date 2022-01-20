@@ -15,7 +15,6 @@ router.post('/', async (req, res) => {
       password, latitude, longitude,
       user_city, user_country,
     } = req.body;
-    // console.log(req.body, 'req body register');
     const candidateFirstName = await User.findOne({ where: { first_name } });
     const candidateLastName = await User.findOne({ where: { last_name } });
     const candidateEmail = await User.findOne({ where: { email } });
@@ -48,7 +47,7 @@ router.post('/', async (req, res) => {
     const userDto = new UserDto(newUser);
 
     // создаем сессию
-    req.session.user = userDto;
+    req.session.user = { id: userDto.id, email: userDto.email };
 
     return res.json({ message: 'Регистрация прошла успешно', user: userDto });
   } catch (error) {

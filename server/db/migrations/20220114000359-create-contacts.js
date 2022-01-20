@@ -7,16 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      instagram: {
-        type: Sequelize.STRING,
-      },
-      telegram: {
-        type: Sequelize.STRING,
-      },
-      phone_number: {
-        type: Sequelize.INTEGER,
-      },
-      whats_up: {
+      user_contact: {
         type: Sequelize.STRING,
       },
       user_id: {
