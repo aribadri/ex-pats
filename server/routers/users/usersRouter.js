@@ -4,6 +4,7 @@ const {
   User,
   Reviews,
   Specialty,
+  Rating,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -24,6 +25,8 @@ router.get('/', async (req, res) => {
 router.get('/search/:id', async (req, res) => {
   try {
     console.log(req.headers.location);
+    console.log(req.params.id);
+
     const profiArr = await User.findAll({ where: { specialty: req.params.id, user_country: req.headers.location } });
     return res.json(
       profiArr,

@@ -10,7 +10,7 @@ import AboutMe from '../components/aboutMe/AboutMe';
 import MyContacts from '../components/userBio/MyContacts';
 import ContactItem from '../components/userBio/ContactItem';
 
-function UserPage() {
+function UserPage({ listForInput }) {
   const userData = useSelector((state) => state.user.userData);
   const statusLoading = useSelector((state) => state.user.loading);
   const statusError = useSelector((state) => state.user.error);
@@ -55,7 +55,13 @@ function UserPage() {
               type="checkbox"
             />
           </label>
-          {userStatusService && <UserSpec />}
+          {userStatusService && (
+          <UserSpec
+            listForInput={listForInput}
+            userId={userId}
+            userData={userData}
+          />
+          )}
         </div>
 
       </div>

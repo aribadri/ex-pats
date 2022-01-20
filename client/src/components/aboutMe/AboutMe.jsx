@@ -31,9 +31,10 @@ export default function AboutMe({
         placeholder="Напишите о себе"
         onChange={(e) => addInputHandler(e)}
       />
-      {loading
-      && <h2 className={styles.animate}>save</h2>}
-      {error && <h2 className={styles.animateError}>ошибка, попробуйте позже </h2>}
+      <div className={styles.divIsloadingIsError}>
+        {loading && <h2 className={styles.animate}>save</h2>}
+        {error && <h2 className={styles.animateError}>ошибка, попробуйте позже </h2>}
+      </div>
     </div>
   );
 }
