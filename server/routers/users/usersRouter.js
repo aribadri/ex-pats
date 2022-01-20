@@ -84,5 +84,20 @@ router.get('/:id/feedback/:param', async (req, res) => {
     return res.json(error);
   }
 });
+router.get('/:id/chat', async (req, res) => {
+  try {
+    console.log(req.params.id, 'params');
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    return res.json(
+      user,
+    );
+  } catch (error) {
+    return res.json(error);
+  }
+});
 
 module.exports = router;

@@ -31,7 +31,7 @@ function Layout({ setModal, location }) {
           ? (
             <div>
               <Link className={styles.linksUserAuth} to={`/users/${isAuth}/profile`}>Мой профиль</Link>
-              <Link className={styles.linksUserAuth} to="/">Чаты</Link>
+              <Link className={styles.linksUserAuth} to="/users/chats">Чаты</Link>
               <Button type="button" use="primary" onClick={() => dispatch(actions.logoutUserThunk())}>Выйти</Button>
             </div>
           )
