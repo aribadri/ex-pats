@@ -10,7 +10,7 @@ function* addDesctiptionUser(action) {
   // вкл загрузку
   yield put(actions.addDescriptionLoading());
   try {
-    yield delay(10000);
+    yield delay(5000);
     const addDescriptionData = yield call(
       axios.post,
       `http://localhost:5000/api/users/new/descriptions/${payload.userId}`,

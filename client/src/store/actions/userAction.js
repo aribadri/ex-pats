@@ -15,7 +15,23 @@ export const loginUserError = (payload) => ({
   type: types.GET_USER_DATA_LOGIN_ERROR,
   payload,
 });
-// login user ---------
+// login user ----------
+
+// reg user ====
+export const regUserSuccess = (payload) => ({
+  type: types.REG_USER_SUCCESS,
+  payload,
+});
+
+export const regUserError = (payload) => ({
+  type: types.REG_USER_ERROR,
+  payload,
+});
+
+export const regUserLoading = () => ({
+  type: types.REG_USER_LOADING,
+});
+// reg user ====
 
 // ------ auth user -------
 export const authUserError = (payload) => ({

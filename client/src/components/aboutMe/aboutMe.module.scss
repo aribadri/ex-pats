@@ -14,6 +14,7 @@
 }
 
 .inputDescription {
+  // position: absolute;
   resize: vertical;
   width: 1139px;
   max-width: 1139px;
@@ -25,3 +26,47 @@
   padding: 15px;
 }
 
+
+@keyframes load {
+  0%{
+      opacity: 0.08;
+/*         font-size: 10px; */
+/* 				font-weight: 400; */
+      filter: blur(5px);
+      letter-spacing: 3px;
+      }
+  100%{
+/*         opacity: 1; */
+/*         font-size: 12px; */
+/* 				font-weight:600; */
+/* 				filter: blur(0); */
+      }
+}
+
+.animate {
+  position: relative;
+  color: #2F2A3E;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  margin: auto;
+  font-size:15px; 
+  animation: load 1.5s infinite 0s ease-in-out;
+  animation-direction: alternate;
+  text-shadow: 0 0 1px white;
+}
+
+.animateError {
+  position: relative;
+  color: #2F2A3E;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  margin: auto;
+  font-size:15px; 
+  animation: load 1.5s infinite 0s ease-in-out;
+  animation-direction: alternate;
+  text-shadow: 0 0 1px white;
+}
