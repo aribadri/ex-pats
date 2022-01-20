@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const router = require('express').Router();
 const {
   User,
@@ -11,7 +12,10 @@ router.get('/', async (req, res) => {
     const specialtiesiArr = await Specialty.findAll();
     // console.log(specialtiesiArr);
 
-    return res.json({ profiArr, specialtiesiArr });
+    return res.json({
+      profiArr,
+      specialtiesiArr,
+    });
   } catch (error) {
     return res.json(error);
   }
@@ -19,8 +23,8 @@ router.get('/', async (req, res) => {
 
 router.get('/search/:id', async (req, res) => {
   try {
-    console.log(req.params.id);
-    const profiArr = await User.findAll();
+    console.log(req.headers.location);
+    const profiArr = await User.findAll({ where: { specialty: req.params.id, user_country: req.headers.location } });
     return res.json(
       profiArr,
     );

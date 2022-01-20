@@ -72,6 +72,9 @@ module.exports = (sequelize, DataTypes) => {
     latitude: {
       type: DataTypes.STRING,
     },
+    specialty: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'User',
