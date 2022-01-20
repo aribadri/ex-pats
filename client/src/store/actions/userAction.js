@@ -195,3 +195,31 @@ export const addContactThunk = (payload) => async (dispatch, getState) => {
     .catch((error) => dispatch(addContactError(error)));
 };
 // add my contacts ++++++
+
+// delete my contact =====
+export const deleteContactLoading = () => ({
+  type: types.DELETE_CONTACT_LOADING,
+});
+
+export const deleteContactError = (payload) => ({
+  type: types.DELETE_CONTACT_ERROR,
+  payload,
+});
+
+export const deleteContactSuccess = (payload) => ({
+  type: types.DELETE_CONTACT_SUCCESS,
+  payload,
+});
+
+// delete my contact thunk
+export const deleteContactThunk = (payload) => async (dispatch, getState) => {
+  dispatch(deleteContactLoading());
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  axios.delete(`http://localhost:5000/api/users/new/contacts/${payload}`, headers)
+    .then((res) => res.data)
+    .then((data) => dispatch(deleteContactSuccess(payload)))
+    .catch((error) => dispatch(deleteContactError(error)));
+};
+// delete my contact =====

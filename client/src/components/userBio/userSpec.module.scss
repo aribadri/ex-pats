@@ -53,41 +53,74 @@
 }
 
 .divContactItem {
-  margin-right: 40px;
-  margin-top: 10px;
+  // margin-right: 40px;
+  // margin-top: 10px;
   font-style: normal;
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 20px;
-  color: #3E3D3D;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
 }
 
 .divDeleteImg {
   // top: 0px;
-  // left: 320px;
-  background-color: #70688b;
-  border-radius: 5px;
+  // left: 480px;
+  background-color: #777777;
+  border-radius: 7px;
   cursor: pointer;
-  position: absolute;
-  width: 20px;
-  height: 20px;
+  margin-left: 15px;
+  // padding-right: 10px;
+  position: relative;
+  width: 23px;
+  height: 23px;
   opacity: 0.8;
-  }
-  .divDeleteImg:hover {
+}
+
+.divDeleteImg:hover {
   opacity: 1;
-  }
-  .divDeleteImg:before, .divDeleteImg:after {
+  background-color: #FFFFFF;
+}
+
+.divDeleteImg:before, .divDeleteImg:after {
   position: absolute;
-  bottom: 3px;
-  left: 9px;
+  bottom: 4px;
+  left: 10px;
   content: ' ';
   height: 15px;
   width: 3px;
   background-color: #E57377;
-  }
-  .divDeleteImg:before {
+}
+
+.divDeleteImg:before {
   transform: rotate(45deg);
-  }
-  .divDeleteImg:after {
+}
+
+.divDeleteImg:after {
   transform: rotate(-45deg);
-  }
+}
+
+.divContactMainItem {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  align-content: center;
+  align-items: center;
+  // min-width: 100px;
+  padding: 20px 10px 20px 20px;
+  height: 50px;
+  border: 2px solid #2F2A3E;
+  box-sizing: border-box;
+  border-radius: 25px;
+  background: #2F2A3E;
+  margin-right: 15px;
+}
+
+.errorMessage {
+  color: red;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.05em;
+}

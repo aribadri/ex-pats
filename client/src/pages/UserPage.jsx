@@ -14,9 +14,7 @@ function UserPage() {
   const userData = useSelector((state) => state.user.userData);
   const statusLoading = useSelector((state) => state.user.loading);
   const statusError = useSelector((state) => state.user.error);
-  console.log(statusError, 'statusError');
   const userContacts = useSelector((state) => state.user.userContacts);
-  // userId используется для того, чтобы обновить ссылку в БД у конкретного юзера
   const userId = userData.id;
   const userStatusService = userData.status_service;
 
