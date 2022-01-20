@@ -4581,6 +4581,11 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
+
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -7227,7 +7232,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@*", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7322,6 +7327,11 @@
   dependencies:
     "@babel/runtime" "^7.12.13"
 
+"react-customizable-scroll@^1.0.1":
+  "integrity" "sha512-P7QZ9SwGNIMzlyaiPdpSUinHy42mcBtmI+KW5hGQAR8LXMeR9IBsbcsK/H0B/VPrRx8vfXnm2frzF7ocpRyyHQ=="
+  "resolved" "https://registry.npmjs.org/react-customizable-scroll/-/react-customizable-scroll-1.0.1.tgz"
+  "version" "1.0.1"
+
 "react-dev-utils@^12.0.0":
   "integrity" "sha512-xBQkitdxozPxt1YZ9O1097EJiVpwHr9FoAuEVURCKV0Av8NBERovJauzP7bo1ThvuhZ4shsQ1AJiu4vQpoT1AQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.0.tgz"
@@ -7352,7 +7362,7 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-"react-dom@^16.0.0 || ^17.0.0", "react-dom@^16.6.3 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=16.9":
+"react-dom@*", "react-dom@^16.0.0 || ^17.0.0", "react-dom@^16.6.3 || ^17.0.0", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=16.9":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -8785,6 +8795,11 @@
   dependencies:
     "detect-node-es" "^1.1.0"
     "tslib" "^1.9.3"
+
+"use-swiper@^1.2.1":
+  "integrity" "sha512-q360cJH3nYX0jyrR52y7dPpdJ6Db1SSoy+82y0DzJKg71L9w7xAApS4VLlvxXqpTaE5R+WfrsaLEJL9xIJmDqw=="
+  "resolved" "https://registry.npmjs.org/use-swiper/-/use-swiper-1.2.1.tgz"
+  "version" "1.2.1"
 
 "util-deprecate@^1.0.1", "util-deprecate@^1.0.2", "util-deprecate@~1.0.1":
   "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="

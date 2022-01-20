@@ -48,10 +48,10 @@ function HomePage({
         <Gapped>
           <Button
             onClick={getList}
-            size="large"
+            size="small"
             use="primary"
           >
-            Find
+            Поиск
           </Button>
         </Gapped>
       </div>
