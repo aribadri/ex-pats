@@ -9,14 +9,15 @@ module.exports = (sequelize, DataTypes) => {
       Contact, Portfolio, Reviews, Messages,
     }) {
       this.belongsTo(Location, { foreignKey: 'id' });
-      this.hasMany(Specialty, { foreignKey: 'user_id' });
-      this.hasOne(Rating, { foreignKey: 'user_id' });
+      // this.hasMany(Specialty, { foreignKey: 'user_id' });
+      // this.hasOne(Rating, { foreignKey: 'user_id' });
       this.hasOne(Contact, { foreignKey: 'user_id' });
       this.hasMany(Portfolio, { foreignKey: 'user_id' });
       this.hasMany(Reviews, { foreignKey: 'user_id_from' });
       this.hasMany(Reviews, { foreignKey: 'user_id_to' });
       this.hasMany(Messages, { foreignKey: 'user_id_from' });
       this.hasMany(Messages, { foreignKey: 'user_id_to' });
+      this.belongsToMany(Specialty, { through: Rating, foreignKey: 'user_id' });
     }
   }
   User.init({

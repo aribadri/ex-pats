@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from '../../icons/Безымянный.png';
 
-function PictureProfi() {
+function PictureProfi({ user }) {
   return (
     <div>
 
-      <img src={logo} alt="" style={{ width: '272px', height: '272px' }} />
+      <img src={`http://localhost:5000${user.avatar_link}`} alt="" style={{ width: '272px', height: '272px' }} />
 
     </div>
   );

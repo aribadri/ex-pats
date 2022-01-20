@@ -8,7 +8,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  GoogleMap, LoadScript, Marker, MarkerClusterer,
+  GoogleMap, LoadScript, Marker, MarkerClusterer, InfoBox,
 } from '@react-google-maps/api';
 import globalContext from '../../context/GlobalContext';
 import About from '../about/About';
@@ -19,11 +19,10 @@ const containerStyle = {
   height: '336px',
 };
 
-function Google({ userCoordinat }) {
+function Google({ userCoordinat, listForMap }) {
   console.log(userCoordinat);
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  const { profiList1 } = useContext(globalContext);
   function zoomNumbers() {
     let number;
     for (let i = 1; i < 11; i++) {
@@ -38,6 +37,17 @@ function Google({ userCoordinat }) {
   // navigateToProfi = () => {
 
   // }
+  function logoOnMap(link) {
+    const iconPin = {
+
+      url: `http://localhost:5000/${link}`,
+      size: new window.google.maps.Size(100, 100),
+      origin: new window.google.maps.Point(0, 15),
+      scaledSize: new window.google.maps.Size(60, 60),
+      border: new window.google.maps.Size(100, 100),
+    };
+    return iconPin
+  }
   return (
     <div>
       <LoadScript
@@ -48,16 +58,20 @@ function Google({ userCoordinat }) {
           center={userCoordinat ? { lat: userCoordinat.lat, lng: userCoordinat.lng } : { lat: 55, lng: 37 }}
           zoom={count}
         >
-          <MarkerClusterer title="Hello">
-            {(clusterer) => profiList1.map((profi) => (
+          <MarkerClusterer>
+            {(clusterer) => listForMap.map((profi) => (
               <Marker
                 key={profi.id}
-                position={{ lat: Number(profi.lat), lng: Number(profi.lng) }}
-                label={profi.name}
+                position={{ lat: Number(profi.latitude), lng: Number(profi.longitude) }}
+                label={profi.first_name}
                 clusterer={clusterer}
-                onClick={() => navigate(`/profi/${profi.id}`)}
-                title={profi.name}
-
+                onClick={() => navigate(`/users/${profi.id}`)}
+                title={profi.first_name}
+                animation={window.google.maps.Animation.DROP}
+                icon={logoOnMap(profi.avatar_link)}
+                style={{ borderRadius: '50%' }}
+                optimized="false"
+                labelStyle={{ backgroundColor: 'yellow', fontSize: '32px', padding: '16px' }}
               />
             ))}
           </MarkerClusterer>

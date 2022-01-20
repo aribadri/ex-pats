@@ -22,6 +22,9 @@ module.exports = {
       text_content: {
         type: Sequelize.TEXT,
       },
+      stars_count: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -1,10 +1,86 @@
-.profilist {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Sumana:wght@700&display=swap");
+.profilist {
+  align-items: center;
+  /* background-color: white; */
+  display: flex;
+  font-family: "Merriweather", serif;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* height: 100vh; */
+  margin: 0;
+  cursor: pointer;
 }
+.person {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+}
+.container {
+  /* border-radius: 90%; */
+  height: 220px;
+  -webkit-tap-highlight-color: transparent;
+  transform: scale(0.48);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 400px;
+}
+.container:after {
+  background-color: white;
+  content: "";
+  font-size: 34px;
+  height: 19px;
+  position: absolute;
+  top: 300px;
+  width: 100%;
+}
+.container:hover {
+  transform: scale(0.54);
+}
+.container-inner {
+  clip-path: path(
+    "M 390,400 C 390,504.9341 304.9341,590 200,590 95.065898,590 10,504.9341 10,400 V 10 H 200 390 Z"
+  );
+  position: relative;
+  transform-origin: 50%;
+  top: -200px;
+}
+
+.img {
+  pointer-events: none;
+  position: relative;
+  transform: translateY(30px) scale(1.15);
+  transform-origin: 50% bottom;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.container:hover .img {
+  transform: translateY(0) scale(1.8);
+}
+.img1 {
+  left: 22px;
+  top: 114px;
+  width: 340px;
+}
+
+.divider {
+  background-color:white;
+  height: 2px;
+  width: 100px;
+}
+.name {
+  color: #2899ea;
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 1px;
+  text-align: center;
+}
+.title {
+  color: #6e6e6e;
+  font-family: arial;
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+

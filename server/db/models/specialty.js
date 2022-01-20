@@ -4,18 +4,13 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Specialty extends Model {
-    static associate({ User }) {
-      this.belongsTo(User, { foreignKey: 'id' });
+    static associate({ User, Rating }) {
+      // this.belongsTo(User, { foreignKey: 'id' });
+      this.belongsToMany(User, { through: Rating, foreignKey: 'speciality_id' });
     }
   }
   Specialty.init({
-    name_specialty: {
-      type: DataTypes.STRING,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-    },
-    specialty_logo_link: {
+    label: {
       type: DataTypes.STRING,
     },
   }, {

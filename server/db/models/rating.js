@@ -4,16 +4,11 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Rating extends Model {
-    static associate({ User }) {
-      this.belongsTo(User, { foreignKey: 'id' });
+    static associate() {
     }
   }
   Rating.init({
-    count_click: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    rating_value: {
+    specialty_id: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
