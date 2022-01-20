@@ -42,8 +42,8 @@ function Google({ userCoordinat, listForMap }) {
     const iconPin = {
 
       url: `http://localhost:5000/${link}`,
-      size: new window.google.maps.Size(70, 110),
-      origin: new window.google.maps.Point(0, 15),
+      size: new window.google.maps.Size(55, 110),
+      origin: new window.google.maps.Point(0, 2),
       scaledSize: new window.google.maps.Size(50, 50),
       border: new window.google.maps.Size(100, 100),
     };

@@ -21,15 +21,7 @@ function FeedBackItem({ el, id }) {
   }, []);
 
   const stars = Array(el.stars_count).fill(0);
-  const params = {
-    direction: '.swiper-pagination',
-    slidesPerView: 'auto',
-    freeMode: true,
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-    mousewheel: true,
-  };
+
   return (
     <div>
       {userFeedback

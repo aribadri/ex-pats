@@ -38,7 +38,6 @@ function HomePage({
     getListForMap();
   }, []);
   const arrNew = [...[listForInput]];
-  console.log(arrNew);
 
   return (
     <div className="homepage">
