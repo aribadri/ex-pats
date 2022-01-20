@@ -96,7 +96,7 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             {userId
               && (
                 <div className="button-message">
-                  <Link to="/profi/:id/chat"><MyButton className="button-chat">Написать сообщение</MyButton></Link>
+                  <Link to={`/users/${id}/chat`}><MyButton className="button-chat">Написать сообщение</MyButton></Link>
                   <MyButton className="button-feedback" onClick={() => setModal(true)}>Написать отзыв</MyButton>
                 </div>
               )}

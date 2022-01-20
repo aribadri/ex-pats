@@ -18,6 +18,7 @@ import RegForm from './components/regForm/RegForm';
 import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
+import ChatLibrary from './components/ChatLibrary/ChatLibrary';
 
 function App() {
   const dispatch = useDispatch();
@@ -88,8 +89,8 @@ function App() {
                   setProfiSelected={setProfiSelected}
                   // setRegionSelected={setRegionSelected}
                   variations={variations}
-                  // arr1={profi}
-                  // arr2={cities}
+                // arr1={profi}
+                // arr2={cities}
                 />
               )}
             />
@@ -104,7 +105,7 @@ function App() {
                   visibleStartChat={StartChat}
                   setStartChat={setStartChat}
                 />
-)}
+              )}
             />
             <Route
               path="/users/:id/profile"
@@ -112,9 +113,9 @@ function App() {
                 <PrivateRoute>
                   <UserPage />
                 </PrivateRoute>
-)}
+              )}
             />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/users/:id/chat" element={<ChatLibrary />} />
           </Route>
         </Routes>
         <MyModal visible={modal} setModal={setModal}>

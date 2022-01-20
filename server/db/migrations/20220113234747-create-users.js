@@ -61,6 +61,9 @@ module.exports = {
       latitude: {
         type: Sequelize.STRING,
       },
+      specialty: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
