@@ -55,7 +55,13 @@ function UserPage({ listForInput }) {
               type="checkbox"
             />
           </label>
-          {userStatusService && <UserSpec listForInput={listForInput} />}
+          {userStatusService && (
+          <UserSpec
+            listForInput={listForInput}
+            userId={userId}
+            userData={userData}
+          />
+          )}
         </div>
 
       </div>

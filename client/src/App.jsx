@@ -56,25 +56,6 @@ function App() {
     dispatch(actions.authUserThunk());
   }, [dispatch]);
 
-  // const cities = [
-  //   { value: 1, label: 'Пхукет' },
-  //   { value: 2, label: 'Паттайя' },
-  //   { value: 3, label: 'Бали' },
-  //   { value: 4, label: 'Южные Гоа' },
-  //   { value: 5, label: 'Северные Гоа' },
-  //   { value: 6, label: 'Самуи' },
-  //   { value: 7, label: 'Нячанг' },
-
-  // ];
-
-  // const profi = [
-  //   { value: 1, label: 'Парикмахер' },
-  //   { value: 2, label: 'Фотграф' },
-  //   { value: 3, label: 'Няня' },
-  //   { value: 4, label: 'Инструктор по серфу' },
-  //   { value: 5, label: 'Гид' },
-  //   { value: 6, label: 'Собутыльник' },
-  // ];
   const items = [
     { title: 'Зарегистрироваться', content: <RegForm setModal={setModal} location={userCoordinat} /> },
     { title: 'Войти', content: <LoginForm setModal={setModal} location={userCoordinat} /> },
@@ -125,9 +106,9 @@ function App() {
             <Route
               path="/users/:id/profile"
               element={(
-                <PrivateRoute>
-                  <UserPage listForInput={listForInput} />
-                </PrivateRoute>
+                // <PrivateRoute>
+                <UserPage listForInput={listForInput} />
+                // </PrivateRoute>
               )}
             />
             <Route path="/users/:id/chat" element={<ChatLibrary />} />

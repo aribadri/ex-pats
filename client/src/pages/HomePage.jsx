@@ -20,9 +20,6 @@ import globalContext from '../context/GlobalContext';
 function HomePage({
   variations, profiSelected, setProfiSelected, userCoordinat, listForMap, listForInput,
 }) {
-  // const [listForMap, setListForMap] = useState([]);
-  // const [listForInput, setListForInput] = useState([]);
-
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
     const config = {
@@ -34,15 +31,7 @@ function HomePage({
     const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`, config);
     setProfiList(data.data);
   }
-  useEffect(() => {
-    // async function getListForMap() {
-    //   const data = await axios.get('http://localhost:5000/api/users');
-    //   console.log(data);
-    //   setListForMap(data.data.profiArr);
-    //   setListForInput(data.data.specialtiesiArr);
-    // }
-    // getListForMap();
-  }, []);
+
   const arrNew = [...[listForInput]];
 
   return (
@@ -60,6 +49,7 @@ function HomePage({
           </Button>
         </Gapped>
       </div>
+      <div className="div-title-map">Специалисты на карте</div>
       <div className="container-map">
         <Google userCoordinat={userCoordinat} listForMap={listForMap} />
       </div>
