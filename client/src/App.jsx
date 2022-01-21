@@ -18,6 +18,8 @@ import RegForm from './components/regForm/RegForm';
 import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
+import ChatLibrary from './components/ChatLibrary/ChatLibrary';
+import Chats from './pages/Chats';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +32,10 @@ function App() {
   const [StartChat, setStartChat] = useState(false);
   const [profiList, setProfiList] = useState();
   const [userCoordinat, setUserCoordinat] = useState({});
+  const [listForMap, setListForMap] = useState([]);
+  const [listForInput, setListForInput] = useState([]);
+  console.log(listForMap, 'listForMap ++');
+  console.log(listForInput, 'listForInput ++');
 
   useEffect(() => {
     const getLocation = async () => {
@@ -39,28 +45,18 @@ function App() {
       });
     };
     getLocation();
+
+    async function getListForMap() {
+      const data = await axios.get('http://localhost:5000/api/users');
+      console.log(data);
+      setListForMap(data.data.profiArr);
+      setListForInput(data.data.specialtiesiArr);
+    }
+    getListForMap();
+
     dispatch(actions.authUserThunk());
   }, [dispatch]);
 
-  // const cities = [
-  //   { value: 1, label: 'Пхукет' },
-  //   { value: 2, label: 'Паттайя' },
-  //   { value: 3, label: 'Бали' },
-  //   { value: 4, label: 'Южные Гоа' },
-  //   { value: 5, label: 'Северные Гоа' },
-  //   { value: 6, label: 'Самуи' },
-  //   { value: 7, label: 'Нячанг' },
-
-  // ];
-
-  // const profi = [
-  //   { value: 1, label: 'Парикмахер' },
-  //   { value: 2, label: 'Фотграф' },
-  //   { value: 3, label: 'Няня' },
-  //   { value: 4, label: 'Инструктор по серфу' },
-  //   { value: 5, label: 'Гид' },
-  //   { value: 6, label: 'Собутыльник' },
-  // ];
   const items = [
     { title: 'Зарегистрироваться', content: <RegForm setModal={setModal} location={userCoordinat} /> },
     { title: 'Войти', content: <LoginForm setModal={setModal} location={userCoordinat} /> },
@@ -81,6 +77,8 @@ function App() {
               index
               element={(
                 <HomePage
+                  listForMap={listForMap}
+                  listForInput={listForInput}
                   userCoordinat={userCoordinat}
                   setUserCoordinat={setUserCoordinat}
                   // regionSelected={regionSelected}
@@ -88,8 +86,8 @@ function App() {
                   setProfiSelected={setProfiSelected}
                   // setRegionSelected={setRegionSelected}
                   variations={variations}
-                  // arr1={profi}
-                  // arr2={cities}
+                // arr1={profi}
+                // arr2={cities}
                 />
               )}
             />
@@ -104,17 +102,19 @@ function App() {
                   visibleStartChat={StartChat}
                   setStartChat={setStartChat}
                 />
-)}
+              )}
             />
             <Route
               path="/users/:id/profile"
               element={(
-                <PrivateRoute>
-                  <UserPage />
-                </PrivateRoute>
-)}
+                // <PrivateRoute>
+                <UserPage listForInput={listForInput} />
+                // </PrivateRoute>
+              )}
             />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/users/:id/chat" element={<Chat />} />
+            <Route path="/users/chats" element={<Chats />} />
+
           </Route>
         </Routes>
         <MyModal visible={modal} setModal={setModal}>

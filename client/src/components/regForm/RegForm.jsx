@@ -130,7 +130,8 @@ function RegForm({ setModal, location }) {
           />
 
         </p>
-        <button className={styles.btnRegForm} type="submit">Зарегистрироваться</button>
+        <div className={styles.formFlex}><button className={`${styles.btnRegForm}`} type="submit">Зарегистрироваться</button></div>
+
       </form>
     </div>
   );

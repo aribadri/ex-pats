@@ -25,7 +25,7 @@
     padding-top: 15px;
 }
 .profi-data{
-    padding-left: 17px;
+    padding-left: 30px;
     width: 100%;
 }
 .fio{
@@ -50,12 +50,14 @@
     font-size: 17px;
     text-align: start;
     padding-bottom: 5px;
+    padding-top: 10px;
+
 }
 .specialization-header{
     font-family: 'Roboto', sans-serif;
     font-style: Medium;
     font-size: 23px;
-    /* padding-bottom: 14px; */
+    padding-top: 30px;
 
 }
 .rating{
@@ -77,6 +79,8 @@
     font-style: Medium;
     font-size: 23px;
     padding-bottom: 14px;
+    padding-top: 50px;
+
 }
 .body-about{
     font-family: 'Roboto';
@@ -91,7 +95,7 @@
     font-style: Medium;
     font-size: 23px;
     margin-bottom: 15px;
-    margin-top: 15px;
+    margin-top: 50px;
 
 }
 .portfolio{
@@ -159,7 +163,8 @@
     font-family: 'Roboto';
     font-style: Medium;
     font-size: 23px;
-    /* padding-bottom: 15px; */
+    padding-bottom: 35px;
+
 }
 .phone{
     padding-right: 50px;
@@ -213,9 +218,9 @@ display: flex;
 }
 .feedBack-container-item{
 margin: 10px;
-padding: 3%;
-border: 1px solid black;
-border-radius: 5px;
+padding: 10px;
+/* border-bottom: 1px solid black; */
+/* border-radius: 5px; */
 
 /* background: linear-gradient(90deg, #eff3f5, white); */
 }
@@ -234,12 +239,13 @@ border-radius: 5px;
     letter-spacing: 0.8px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    margin-bottom: 10px;
+    /* justify-content: space-between; */
 } 
 
 
 .feedBack-container-item:hover{
-border: 1px solid #167ac1;
+/* border: 1px solid #167ac1; */
 }
 .list-feedback{
     display: flex;
@@ -248,7 +254,7 @@ border: 1px solid #167ac1;
     overflow-y: auto;
     height: 500px;
     /* border-top: dashed black; */
-    border-bottom: 2px solid orange;
+    /* border-bottom: 2px solid orange; */
     /* border-left: dashed #177fff; */
     border-width: 1px;
     /* background-color: rgb(187, 187, 187); */
@@ -285,7 +291,7 @@ border-radius: 50px;
     transition: transform 0.1s;
     position: relative;
     right: 0px;
-
+margin-right: 10px;
 }
 .avatar-feedback:hover{
     transform: scale(1.2);
@@ -301,9 +307,9 @@ font-size: 12px;
 .text-feedback{
     font-size: 12px;
 }
-.card-work,.div-scope{
+.card-work{
     border-radius: 3px;
-    border: 0.1px solid black;
+    /* border: 0.1px solid black; */
     background-size: cover;
     min-width: 165px;
     min-height: 165px;
@@ -311,7 +317,7 @@ font-size: 12px;
    transition: transform 0.5s;
 }
 .div-scope:hover{
-    background: linear-gradient(#2899ea, #167ac1);
+    /* background: linear-gradient(#2899ea, #167ac1); */
     /* border-radius:50%;    */
     border:none;   
 }

@@ -30,10 +30,13 @@ function FeedBackItem({ el, id, user }) {
         ? (
           <div className="feedBack-container-item">
             <div className="text-header-content-feedback">
-              <div className="text-feedback">Отзыв:</div>
+              <div className="text-feedback">
+                {(' ')}
+                {' '}
+              </div>
               {' '}
-              <Link to={`/users/${userFeedback.id}`} className="link-name-feedback">{userFeedback.first_name}</Link>
               <img src={`http://localhost:5000${userFeedback.avatar_link}`} alt="" className="avatar-feedback" />
+              <Link to={`/users/${userFeedback.id}`} className="link-name-feedback">{userFeedback.first_name}</Link>
             </div>
             <div className="text-value-content-feedback">
               Оценка:

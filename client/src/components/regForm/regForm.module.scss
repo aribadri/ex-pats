@@ -4,6 +4,11 @@
   margin-top: 30px;
   align-items: center;
 }
+.formFlex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .inputRegFormName {
   height: 50px;
@@ -41,7 +46,7 @@
   color: #FFFFFF;
   height: 50px;
   width: 383px;
-  background: #2F2A3E;
+  background: linear-gradient(#2899ea, #167ac1);;
   border-radius: 25px;
   border: none;
 }

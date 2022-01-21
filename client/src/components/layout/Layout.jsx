@@ -31,11 +31,12 @@ function Layout({ setModal, location }) {
           ? (
             <div>
               <Link className={styles.linksUserAuth} to={`/users/${isAuth}/profile`}>Мой профиль</Link>
-              <Link className={styles.linksUserAuth} to="/">Чаты</Link>
-              <Button type="button" use="primary" onClick={() => dispatch(actions.logoutUserThunk())}>Выйти</Button>
+              <Link className={styles.linksUserAuth} to="/users/chats">Чаты</Link>
+              <Button arrow="left" type="button" use="primary" onClick={() => dispatch(actions.logoutUserThunk())}>Выйти</Button>
             </div>
           )
-          : <Button type="button" use="primary" size="small" onClick={() => setModal(true)}>Войти</Button>}
+
+          : <Button arrow="left" type="button" use="primary" size="small" onClick={() => setModal(true)}>Войти</Button>}
       </header>
       <Outlet />
     </>

@@ -9,7 +9,7 @@ function FeedBackList({ user }) {
 
   return (
     <div className="container-feedback">
-      <div className="header-feedback">Отзывы:</div>
+      <div className="header-feedback">Отзывы</div>
       <div className="list-feedback">
         {
         user.map((el) => <FeedBackItem key={el.id} el={el} user={user} />)

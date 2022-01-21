@@ -223,3 +223,38 @@ export const deleteContactThunk = (payload) => async (dispatch, getState) => {
     .catch((error) => dispatch(deleteContactError(error)));
 };
 // delete my contact =====
+
+// edit my specialty ------
+export const editSpecialtyLoading = () => ({
+  type: types.EDIT_SPECIALTY_LOADING,
+});
+
+export const editSpecialtyError = (payload) => ({
+  type: types.EDIT_SPECIALTY_ERROR,
+  payload,
+});
+
+export const editSpecialtySuccess = (payload) => ({
+  type: types.EDIT_SPECIALTY_SUCCESS,
+  payload,
+});
+
+// edit my specialty thunk
+export const editSpecialtyThunk = (payload) => async (dispatch, getState) => {
+  console.log(payload, 'payload asdf');
+  dispatch(editSpecialtyLoading());
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  axios.put(
+    `http://localhost:5000/api/users/specialty/${payload.id}`,
+    { specialty: payload.specialty },
+    { headers, withCredentials: true },
+  )
+    .then((res) => res.data)
+    .then((data) => {
+      dispatch(editSpecialtySuccess(data));
+    })
+    .catch((error) => dispatch(editSpecialtyError(error)));
+};
+// edit my specialty ++++++

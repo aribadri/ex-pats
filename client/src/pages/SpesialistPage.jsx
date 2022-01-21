@@ -92,7 +92,7 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
                   <div className="last-name-profi"><LastNameProfi user={user} /></div>
                 </div>
                 <div className="country-profi"><CountryProfi user={user} /></div>
-                <div className="rating"><RatingProfi user={user} /></div>
+                {/* <div className="rating"><RatingProfi user={user} /></div> */}
                 <div className="specialization-header">Специализация</div>
                 <div className="specialization"><Specialization user={user} /></div>
               </div>
@@ -106,7 +106,7 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
               <div className="header-portfolio">Мои работы</div>
               <div className="wrapper-pogo">
                 <ReactIdSwiper {...swiperOptions} ref={swiper}>
-                  {Portfolios.map((el) => <div className="div-scope div-scope-double"><img src={`http://localhost:5000/${el.link_photo}`} key={el.id} el={el} alt="" className="card-work" /></div>)}
+                  {Portfolios.map((el) => <img src={`http://localhost:5000/${el.link_photo}`} key={el.id} el={el} alt="" className="card-work" />)}
                 </ReactIdSwiper>
               </div>
 
@@ -125,7 +125,7 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             {userId
               && (
                 <div className="button-message">
-                  <Link to={`/profi/${id}/chat`}><Button use="primary" size="small">Написать сообщение</Button></Link>
+                  <Link to={`/users/${id}/chat`}><Button use="primary" size="small">Написать сообщение</Button></Link>
                   <Button use="primary" size="small" onClick={() => setModal(true)}>Написать отзыв</Button>
                 </div>
               )}

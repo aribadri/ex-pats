@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 const router = require('express').Router();
 const {
   User,
   Reviews,
   Specialty,
   Portfolio,
+  Rating,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -12,7 +14,10 @@ router.get('/', async (req, res) => {
     const specialtiesiArr = await Specialty.findAll();
     // console.log(specialtiesiArr);
 
-    return res.json({ profiArr, specialtiesiArr });
+    return res.json({
+      profiArr,
+      specialtiesiArr,
+    });
   } catch (error) {
     return res.json(error);
   }
@@ -20,8 +25,10 @@ router.get('/', async (req, res) => {
 
 router.get('/search/:id', async (req, res) => {
   try {
+    console.log(req.headers.location);
     console.log(req.params.id);
-    const profiArr = await User.findAll();
+
+    const profiArr = await User.findAll({ where: { specialty: req.params.id, user_country: req.headers.location } });
     return res.json(
       profiArr,
     );
@@ -73,6 +80,21 @@ router.get('/:id/feedback/:param', async (req, res) => {
     const user = await User.findOne({
       where: {
         id: req.params.param,
+      },
+    });
+    return res.json(
+      user,
+    );
+  } catch (error) {
+    return res.json(error);
+  }
+});
+router.get('/:id/chat', async (req, res) => {
+  try {
+    console.log(req.params.id, 'params');
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
       },
     });
     return res.json(
