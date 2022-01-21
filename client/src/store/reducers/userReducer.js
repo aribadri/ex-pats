@@ -8,6 +8,7 @@ export default function userReducer(state = {}, action) {
     case types.GET_USER_DATA_AUTH_LOADING:
     case types.STATUS_SERVICE_CHANGE_LOADING:
     case types.ADD_DESCRIPTION_LOADING:
+    case types.DELETE_CONTACT_LOADING:
     case types.REG_USER_LOADING:
     case types.ADD_CONTACT_LOADING:
     case types.LOGOUT_USER_LOADING: {
@@ -43,6 +44,7 @@ export default function userReducer(state = {}, action) {
 
     // обработка ошибки
     case types.GET_USER_DATA_LOGIN_ERROR:
+    case types.DELETE_CONTACT_ERROR:
     case types.DELETE_USER_PORTFOLIO_IMG_ERROR:
     case types.GET_USER_DATA_AUTH_ERROR:
     case types.STATUS_SERVICE_CHANGE_ERROR:
@@ -111,9 +113,19 @@ export default function userReducer(state = {}, action) {
     case types.ADD_CONTACT_SUCCESS: {
       const newState = { ...state };
       newState.loading = false;
+      newState.error = null;
       newState.userContacts = [...newState.userContacts, payload];
       return newState;
     }
+
+    // delete user contact
+    case types.DELETE_CONTACT_SUCCESS: {
+      const newState = { ...state };
+      newState.loading = false;
+      newState.userContacts = newState.userContacts.filter((contact) => contact.id !== payload);
+      return newState;
+    }
+
     default: {
       return state;
     }
