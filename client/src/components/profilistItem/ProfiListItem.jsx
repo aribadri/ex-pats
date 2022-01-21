@@ -21,8 +21,19 @@ function ProfiListItem({ profi }) {
           </div>
         </div>
         <div className="divider" />
-        <div className="name">{profi.first_name}</div>
-        <div className="title">Product Manager</div>
+        <div className="name">
+          {profi.first_name}
+          {(' ')}
+          {profi.last_name}
+        </div>
+        <div className="title"><strong>{profi.specialty}</strong></div>
+        <div className="title">
+          {profi.user_country}
+          ,
+          {(' ')}
+          {profi.user_city}
+        </div>
+
       </div>
     </div>
 

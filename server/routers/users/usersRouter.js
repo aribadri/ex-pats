@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const router = require('express').Router();
 const {
   User,
@@ -12,7 +13,10 @@ router.get('/', async (req, res) => {
     const specialtiesiArr = await Specialty.findAll();
     // console.log(specialtiesiArr);
 
-    return res.json({ profiArr, specialtiesiArr });
+    return res.json({
+      profiArr,
+      specialtiesiArr,
+    });
   } catch (error) {
     return res.json(error);
   }
@@ -20,27 +24,8 @@ router.get('/', async (req, res) => {
 
 router.get('/search/:id', async (req, res) => {
   try {
-    console.log(req.params.id, 'data client search');
-    console.log(req.params, 'data client search');
-
-    console.log(req.headers, 'req.headers ===');
-    // локация, инпут, статус
-    console.log(req.headers.location, 'location');
-    const profiArr = await User.findAll(
-      {
-        include: [
-          {
-            model: Specialty,
-            through: {
-              attributes: [Rating],
-              where: { specialty_id: 1 },
-            },
-          },
-        ],
-      },
-    );
-    // raw: true,
-    console.log(profiArr, 'ответ бэка');
+    console.log(req.headers.location);
+    const profiArr = await User.findAll({ where: { specialty: req.params.id, user_country: req.headers.location } });
     return res.json(
       profiArr,
     );

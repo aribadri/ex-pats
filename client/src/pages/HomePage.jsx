@@ -25,19 +25,13 @@ function HomePage({
 
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
-    // const headers = {
-    //   'Content-Type': 'application/json',
-    //   Location: `${userCoordinat.country}`,
-    // };
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Location: `${userCoordinat.country}`,
       },
     };
-
     const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`, config);
-    console.log(data, 'answer data');
     setProfiList(data.data);
   }
   useEffect(() => {

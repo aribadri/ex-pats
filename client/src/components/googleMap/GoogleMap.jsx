@@ -42,8 +42,8 @@ function Google({ userCoordinat, listForMap }) {
     const iconPin = {
 
       url: `http://localhost:5000/${link}`,
-      size: new window.google.maps.Size(55, 110),
-      origin: new window.google.maps.Point(0, 2),
+      size: new window.google.maps.Size(55, 120),
+      origin: new window.google.maps.Point(0, 0.5),
       scaledSize: new window.google.maps.Size(50, 50),
       border: new window.google.maps.Size(100, 100),
     };
@@ -64,11 +64,11 @@ function Google({ userCoordinat, listForMap }) {
               <Marker
                 key={profi.id}
                 position={{ lat: Number(profi.latitude), lng: Number(profi.longitude) }}
-                label={profi.first_name}
+                title={`${profi.first_name} ${profi.last_name}`}
                 clusterer={clusterer}
                 onClick={() => navigate(`/users/${profi.id}`)}
-                title={profi.first_name}
-                animation={window.google.maps.Animation.DROP}
+                label={`${profi.specialty}`}
+                animation={window.google.maps.Animation.BOUNCE}
                 icon={logoOnMap(profi.avatar_link)}
                 style={{ borderRadius: '50%' }}
                 optimized="false"
