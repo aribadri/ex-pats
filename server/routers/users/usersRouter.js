@@ -3,6 +3,7 @@ const {
   User,
   Reviews,
   Specialty,
+  Portfolio,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -36,7 +37,8 @@ router.get('/:id', async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: Reviews,
+      include: 
+    [Reviews, Portfolio],
     });
     return res.json(
       user,

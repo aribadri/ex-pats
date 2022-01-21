@@ -1,9 +1,4 @@
-.portfolio, .feedback{
-  max-width: 1000px;
-  margin: auto;
-  /* margin: 10px; */
-  
-}
+
 .items{
   display: flex;
   flex-direction: row;

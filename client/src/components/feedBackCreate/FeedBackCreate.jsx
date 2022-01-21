@@ -105,6 +105,7 @@ const FeedBackCreate = ({ id, setModal }) => {
         placeholder="Введите текст..."
         style={styles.textarea}
         value={inputValue}
+        maxLength="600"
         onChange={(e) => setInputValue(e.target.value)}
       />
 

@@ -60,24 +60,23 @@ function Slider({ setModal }) {
 
   const swiper = useRef(null);
   const swiperOptions = {
-    // direction: 'horizontal',
-    // loop: true,
-    // slidesPerView: 'auto',
-    // mousewheel: true,
-    // observer: true,
-    // observeParents: true,
+    direction: 'horizontal',
+    loop: true,
+    slidesPerView: 'auto',
+    mousewheel: true,
+    observer: true,
+    observeParents: true,
     // loop: false,
-    // slidesPerView: 'auto',
-    // spaceBetween: 20,
-    // pagination: {
-    //   el: '.swiper-pagination',
-    //   type: 'bullets',
-    //   clickable: true,
-    // },
+    spaceBetween: 20,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true,
+    },
     on: { slideChange: (index) => { setCurrentIndex(index); } },
     paginationClickable: true,
-    direction: 'horizontal',
-    mousewheel: true,
+    // direction: 'horizontal',
+    // mousewheel: true,
     // navigation: {
     //   nextEl: '.swiper-button-next',
     //   prevEl: '.swiper-button-prev',

@@ -5,8 +5,8 @@ function CardWork({ el, setModal }) {
   return (
     <div className="item" onClick={() => setModal(true)}>
 
-      {/* <h2>{el.title}</h2>
-      <p>{el.text}</p> */}
+      <h2>{el.title}</h2>
+      <p>{el.text}</p>
     </div>
   );
 }

@@ -4,13 +4,15 @@ import '../components/scrolllabel/Scrolllabel.css';
 import './SpesialistPage.css';
 // import 'swiper/css/swiper.css';
 // import Swiper from 'swiper';
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useRef } from 'react';
 // import ReactIdSwiper from 'react-id-swiper';
-// import Scrollable from '../components/scrolllabel/Scrolllabel';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@skbkontur/react-ui';
+import ReactIdSwiper from 'react-id-swiper';
+import Carusel from '../components/carusel/Carusel';
+import Scrollable from '../components/scrolllabel/Scrolllabel';
 import About from '../components/about/About';
 // import Dialog from '../components/dialog/Dialog';
 import Contacts from '../components/contacts/Contacts';
@@ -35,6 +37,27 @@ import NewLoader from '../UI/newLoader/NewLoader';
 
 // eslint-disable-next-line
 export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWorkCard, visibleStartChat, setStartChat }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const swiper = useRef(null);
+  const swiperOptions = {
+    direction: 'horizontal',
+    // loop: true,
+    slidesPerView: 'auto',
+    // mousewheel: true,
+    // observer: true,
+    // observeParents: true,
+    // spaceBetween: 20,
+    // on: { slideChange: (index) => { setCurrentIndex(index); } },
+    // paginationClickable: true,
+    // navigation: {
+    //   nextEl: '.swiper-button-next',
+    //   prevEl: '.swiper-button-prev',
+    // },
+    // renderPrevButton: () => <button type="button" className="swiper-button-prev">Prev</button>,
+    // renderNextButton: () => <button type="button" className="swiper-button-next">Next</button>,
+  };
+  // console.log(currentIndex, 111111111111111);
   const { id } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -45,17 +68,17 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
     }
     getUser();
   }, [id]);
-  const { Reviews } = user;
+  const { Reviews, Portfolios } = user;
   const userId = useSelector((state) => state.user.userData.id);
-  const params = {
-    direction: 'vertical',
-    slidesPerView: 'auto',
-    freeMode: true,
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-    mousewheel: true,
-  };
+  // const params = {
+  //   direction: 'vertical',
+  //   slidesPerView: 'auto',
+  //   freeMode: true,
+  //   scrollbar: {
+  //     el: '.swiper-scrollbar',
+  //   },
+  //   mousewheel: true,
+  // };
   return (
     <div className="wrap-profi">
       {!Reviews ? <NewLoader style={{ fontSize: '64px' }} />
@@ -77,14 +100,20 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             <div className="about">
               <About user={user} />
             </div>
-            <FeedBackList user={Reviews} />
+            {Reviews ? <FeedBackList user={Reviews} /> : <div>Пока отзывов нет...</div>}
+
             <div className="portfolio">
               <div className="header-portfolio">Мои работы</div>
-              <div className="wrapper-pogo" />
+              <div className="wrapper-pogo">
+                <ReactIdSwiper {...swiperOptions} ref={swiper}>
+                  {Portfolios.map((el) => <div className="div-scope div-scope-double"><img src={`http://localhost:5000/${el.link_photo}`} key={el.id} el={el} alt="" className="card-work" /></div>)}
+                </ReactIdSwiper>
+              </div>
+
             </div>
             <div className="contact-conteiner">
               <div className="header-contacts">Контакты</div>
-              <Contacts />
+              <Contacts user={user} />
             </div>
             <MyModal visible={visibleWorkCard} setModal={setmodalWorkCard} />
             <MyModal visible={visible} setModal={setModal}>
@@ -96,8 +125,8 @@ export const SpecialistPage = ({ visible, setModal, visibleWorkCard, setmodalWor
             {userId
               && (
                 <div className="button-message">
-                  <Link to="/profi/:id/chat"><MyButton className="button-chat">Написать сообщение</MyButton></Link>
-                  <MyButton className="button-feedback" onClick={() => setModal(true)}>Написать отзыв</MyButton>
+                  <Link to={`/profi/${id}/chat`}><Button use="primary" size="small">Написать сообщение</Button></Link>
+                  <Button use="primary" size="small" onClick={() => setModal(true)}>Написать отзыв</Button>
                 </div>
               )}
 

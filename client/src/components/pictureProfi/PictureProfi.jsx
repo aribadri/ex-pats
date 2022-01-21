@@ -5,7 +5,7 @@ function PictureProfi({ user }) {
   return (
     <div>
 
-      <img src={`http://localhost:5000${user.avatar_link}`} alt="" style={{ width: '272px', height: '272px' }} />
+      <img src={`http://localhost:5000${user.avatar_link}`} alt="" style={{ width: '100%', height: '100%' }} />
 
     </div>
   );
