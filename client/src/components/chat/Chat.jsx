@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -19,6 +20,13 @@ function Chat() {
     getUser();
   }, [id]);
   console.log(toUserChat);
+  self.addEventListener('push', (event) => {
+    if (event.data) {
+      console.log('This push event has data: ', event.data.text());
+    } else {
+      console.log('This push event has no data.');
+    }
+  });
   return (
     <div>
       {fromUser && toUserChat

@@ -71,6 +71,7 @@ function InputList({
         placeholder={variations}
         value={selected}
         renderItem={renderItem}
+        drawArrow
       />
     </Tooltip>
   );

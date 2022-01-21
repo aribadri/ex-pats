@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
@@ -24,7 +25,9 @@ function HomePage({
   const [listForInput, setListForInput] = useState([]);
 
   const { profiList, setProfiList } = useContext(globalContext);
+  const [btn, setBtn] = useState(false);
   async function getList() {
+    setBtn(true);
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -33,6 +36,12 @@ function HomePage({
     };
     const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`, config);
     setProfiList(data.data);
+    setTimeout(() => {
+      setBtn(false);
+    }, 1000);
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 1000);
   }
   useEffect(() => {
     async function getListForMap() {
@@ -54,7 +63,9 @@ function HomePage({
           <Button
             onClick={getList}
             size="small"
-            use="primary"
+            use="pay"
+            arrow="left"
+            loading={btn}
           >
             Поиск
           </Button>
