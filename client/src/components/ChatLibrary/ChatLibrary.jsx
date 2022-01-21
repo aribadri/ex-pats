@@ -16,11 +16,11 @@ class ChatLibrary extends Component {
     Talk.ready
       .then(() => {
         const me = new Talk.User({
-          id: this.props.userChat.id,
-          name: `${this.props.userChat.first_name}`,
-          email: 'george@looney.net',
-          photoUrl: `http://localhost:5000${this.props.userChat.avatar_link}`,
-          welcomeMessage: 'Hey there! How are you? :-)',
+          id: this.props.fromUser.id,
+          name: `${this.props.fromUser.first_name}`,
+          email: `${this.props.fromUser.email}`,
+          photoUrl: `http://localhost:5000${this.props.fromUser.avatar_link}`,
+          // welcomeMessage: 'Hey there! How are you? :-)',
         });
 
         if (!window.talkSession) {
@@ -31,11 +31,11 @@ class ChatLibrary extends Component {
         }
 
         const other = new Talk.User({
-          id: this.props.userChat.id,
-          name: `${this.props.userChat.first_name}`,
-          email: 'george@looney.net',
-          photoUrl: `http://localhost:5000${this.props.userChat.avatar_link}`,
-          welcomeMessage: 'Hey there! Love to chat :-)',
+          id: this.props.toUser.id,
+          name: `${this.props.toUser.first_name}`,
+          email: `${this.props.toUser.email}`,
+          photoUrl: `http://localhost:5000${this.props.toUser.avatar_link}`,
+          // welcomeMessage: 'Hey there! Love to chat :-)',
         });
 
         // You control the ID of a conversation. oneOnOneId is a helper method that generates

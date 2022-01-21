@@ -19,6 +19,7 @@ import * as actions from './store/actions/userAction';
 import Chat from './components/chat/Chat';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
 import ChatLibrary from './components/ChatLibrary/ChatLibrary';
+import Chats from './pages/Chats';
 
 function App() {
   const dispatch = useDispatch();
@@ -111,7 +112,9 @@ function App() {
                 // </PrivateRoute>
               )}
             />
-            <Route path="/users/:id/chat" element={<ChatLibrary />} />
+            <Route path="/users/:id/chat" element={<Chat />} />
+            <Route path="/users/chats" element={<Chats />} />
+
           </Route>
         </Routes>
         <MyModal visible={modal} setModal={setModal}>
