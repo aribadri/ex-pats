@@ -28,6 +28,8 @@ module.exports = class UserDto {
 
   status_service;
 
+  specialty;
+
   constructor(model) {
     this.first_name = model.first_name;
     this.last_name = model.last_name;
@@ -43,5 +45,6 @@ module.exports = class UserDto {
     this.user_country = model.user_country;
     this.user_city = model.user_city;
     this.status_service = model.status_service;
+    this.specialty = model.specialty;
   }
 };

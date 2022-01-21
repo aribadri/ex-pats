@@ -4,6 +4,7 @@ export default function userReducer(state = {}, action) {
   const { type, payload } = action;
   switch (type) {
     case types.GET_USER_DATA_LOGIN_LOADING:
+    case types.EDIT_SPECIALTY_LOADING:
     case types.GET_ALL_USER_PORTFOLIO_LOADING:
     case types.GET_USER_DATA_AUTH_LOADING:
     case types.STATUS_SERVICE_CHANGE_LOADING:
@@ -51,6 +52,7 @@ export default function userReducer(state = {}, action) {
     case types.ADD_DESCRIPTION_ERROR:
     case types.ADD_CONTACT_ERROR:
     case types.REG_USER_ERROR:
+    case types.EDIT_SPECIALTY_ERROR:
     case types.LOGOUT_USER_ERROR: {
       const newState = { ...state };
       newState.loading = false;
@@ -125,7 +127,14 @@ export default function userReducer(state = {}, action) {
       newState.userContacts = newState.userContacts.filter((contact) => contact.id !== payload);
       return newState;
     }
-
+    // EDIT_SPECIALTY_SUCCESS
+    case types.EDIT_SPECIALTY_SUCCESS: {
+      const newState = { ...state };
+      console.log(payload, 'payload edit ');
+      newState.loading = false;
+      newState.userData = { ...newState.userData, specialty: payload.specialty };
+      return newState;
+    }
     default: {
       return state;
     }

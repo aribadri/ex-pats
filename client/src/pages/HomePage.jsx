@@ -19,11 +19,8 @@ import ProfiList from '../components/profilist/ProfiList';
 import globalContext from '../context/GlobalContext';
 
 function HomePage({
-  variations, profiSelected, setProfiSelected, userCoordinat,
+  variations, profiSelected, setProfiSelected, userCoordinat, listForMap, listForInput,
 }) {
-  const [listForMap, setListForMap] = useState([]);
-  const [listForInput, setListForInput] = useState([]);
-
   const { profiList, setProfiList } = useContext(globalContext);
   const [btn, setBtn] = useState(false);
   async function getList() {
@@ -43,15 +40,7 @@ function HomePage({
       window.scrollTo(0, document.body.scrollHeight);
     }, 1000);
   }
-  useEffect(() => {
-    async function getListForMap() {
-      const data = await axios.get('http://localhost:5000/api/users');
-      console.log(data);
-      setListForMap(data.data.profiArr);
-      setListForInput(data.data.specialtiesiArr);
-    }
-    getListForMap();
-  }, []);
+
   const arrNew = [...[listForInput]];
 
   return (
@@ -71,6 +60,7 @@ function HomePage({
           </Button>
         </Gapped>
       </div>
+      <div className="div-title-map">Специалисты на карте</div>
       <div className="container-map">
         <Google userCoordinat={userCoordinat} listForMap={listForMap} />
       </div>

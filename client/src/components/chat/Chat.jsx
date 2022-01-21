@@ -29,7 +29,7 @@ function Chat() {
   });
   return (
     <div>
-      {fromUser && toUserChat
+      {(fromUser && toUserChat)
         ? <ChatLibrary toUser={toUserChat} fromUser={fromUser} /> : 'loading...'}
     </div>
   );
