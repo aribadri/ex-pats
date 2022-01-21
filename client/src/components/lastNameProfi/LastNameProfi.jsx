@@ -3,7 +3,7 @@ import React from 'react';
 function LastNameProfi({ user }) {
   return (
     <div>
-      {user.last_namety}
+      {user.last_name}
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Specialization() {
+function Specialization({ user }) {
   return (
     <div>
-      Сантехник
+      {user.specialty}
     </div>
   );
 }

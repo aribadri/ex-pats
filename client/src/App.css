@@ -48,6 +48,8 @@ ol[class] {
 /* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
 a:not([class]) {
   text-decoration-skip-ink: auto;
+  
+
 }
 
 /* Упрощаем работу с изображениями */
@@ -85,6 +87,10 @@ select {
   flex-direction: column;
   margin: 0 auto;
   font-family: Roboto;
+  /* height: 100vh; */
+}
+.Link{
+  text-decoration: none;
 }
 
 /* 
