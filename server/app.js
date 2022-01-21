@@ -68,5 +68,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/users/status/service/:id', statusServiceRouter);
 app.use('/api/users/new/descriptions/:id', addDescriptionRouter);
 app.use('/api/users/new/contacts/:id', addNewContactRouter);
+app.use('/api/users/specialty/:id', addNewContactRouter);
 
 module.exports = app;

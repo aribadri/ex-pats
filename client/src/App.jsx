@@ -30,6 +30,10 @@ function App() {
   const [StartChat, setStartChat] = useState(false);
   const [profiList, setProfiList] = useState();
   const [userCoordinat, setUserCoordinat] = useState({});
+  const [listForMap, setListForMap] = useState([]);
+  const [listForInput, setListForInput] = useState([]);
+  console.log(listForMap, 'listForMap ++');
+  console.log(listForInput, 'listForInput ++');
 
   useEffect(() => {
     const getLocation = async () => {
@@ -39,6 +43,15 @@ function App() {
       });
     };
     getLocation();
+
+    async function getListForMap() {
+      const data = await axios.get('http://localhost:5000/api/users');
+      console.log(data);
+      setListForMap(data.data.profiArr);
+      setListForInput(data.data.specialtiesiArr);
+    }
+    getListForMap();
+
     dispatch(actions.authUserThunk());
   }, [dispatch]);
 
@@ -81,6 +94,8 @@ function App() {
               index
               element={(
                 <HomePage
+                  listForMap={listForMap}
+                  listForInput={listForInput}
                   userCoordinat={userCoordinat}
                   setUserCoordinat={setUserCoordinat}
                   // regionSelected={regionSelected}
@@ -110,7 +125,7 @@ function App() {
               path="/users/:id/profile"
               element={(
                 <PrivateRoute>
-                  <UserPage />
+                  <UserPage listForInput={listForInput} />
                 </PrivateRoute>
 )}
             />

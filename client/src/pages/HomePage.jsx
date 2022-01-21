@@ -18,24 +18,36 @@ import ProfiList from '../components/profilist/ProfiList';
 import globalContext from '../context/GlobalContext';
 
 function HomePage({
-  variations, profiSelected, setProfiSelected, userCoordinat,
+  variations, profiSelected, setProfiSelected, userCoordinat, listForMap, listForInput,
 }) {
-  const [listForMap, setListForMap] = useState([]);
-  const [listForInput, setListForInput] = useState([]);
+  // const [listForMap, setListForMap] = useState([]);
+  // const [listForInput, setListForInput] = useState([]);
 
   const { profiList, setProfiList } = useContext(globalContext);
   async function getList() {
-    const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`);
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   Location: `${userCoordinat.country}`,
+    // };
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Location: `${userCoordinat.country}`,
+      },
+    };
+
+    const data = await axios.get(`http://localhost:5000/api/users/search/${profiSelected.label}`, config);
+    console.log(data, 'answer data');
     setProfiList(data.data);
   }
   useEffect(() => {
-    async function getListForMap() {
-      const data = await axios.get('http://localhost:5000/api/users');
-      console.log(data);
-      setListForMap(data.data.profiArr);
-      setListForInput(data.data.specialtiesiArr);
-    }
-    getListForMap();
+    // async function getListForMap() {
+    //   const data = await axios.get('http://localhost:5000/api/users');
+    //   console.log(data);
+    //   setListForMap(data.data.profiArr);
+    //   setListForInput(data.data.specialtiesiArr);
+    // }
+    // getListForMap();
   }, []);
   const arrNew = [...[listForInput]];
 

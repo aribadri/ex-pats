@@ -3,6 +3,7 @@ const {
   User,
   Reviews,
   Specialty,
+  Rating,
 } = require('../../db/models');
 
 router.get('/', async (req, res) => {
@@ -19,8 +20,27 @@ router.get('/', async (req, res) => {
 
 router.get('/search/:id', async (req, res) => {
   try {
-    console.log(req.params.id);
-    const profiArr = await User.findAll();
+    console.log(req.params.id, 'data client search');
+    console.log(req.params, 'data client search');
+
+    console.log(req.headers, 'req.headers ===');
+    // локация, инпут, статус
+    console.log(req.headers.location, 'location');
+    const profiArr = await User.findAll(
+      {
+        include: [
+          {
+            model: Specialty,
+            through: {
+              attributes: [Rating],
+              where: { specialty_id: 1 },
+            },
+          },
+        ],
+      },
+    );
+    // raw: true,
+    console.log(profiArr, 'ответ бэка');
     return res.json(
       profiArr,
     );
